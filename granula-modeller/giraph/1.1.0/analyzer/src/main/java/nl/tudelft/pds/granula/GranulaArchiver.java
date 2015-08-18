@@ -46,12 +46,12 @@ public class GranulaArchiver {
 
         System.out.println(String.format("Archiving workload at: %s.", new Date(System.currentTimeMillis())));
 
-        String workloadDirPath = "/home/wing/Workstation/Dropbox/Projects/Result/log/";
+        String workloadDirPath = "/home/wing/Workstation/Dropbox/Repo/granula/data/input/";
         File workloadDir = new File(workloadDirPath);
         File[] workloadFiles = workloadDir.listFiles();
         Arrays.sort(workloadFiles);
         File workloadFile =workloadFiles[workloadFiles.length - 1];
-        workloadFile = new File("home/wing/Workstation/Dropbox/Projects/Result/log/giraph.tar.gz");
+//        workloadFile = new File("home/wing/Workstation/Dropbox/Projects/Result/log/giraph.tar.gz");
         WorkloadLog workloadLog = new WorkloadLog(workloadFile.getName().replace(".tar.gz", ""), workloadDirPath + workloadFile.getName());
 
         LogManager logManager = new LogManager(workloadLog);
@@ -98,11 +98,12 @@ public class GranulaArchiver {
 //        String xml = XMLFormatter.format(workload.export());
 
         try {
-            PrintWriter writer = new PrintWriter("../../../../granula-visualizer/archive/most-updated.xml", "UTF-8");
-            writer.print(xml);
-            writer.close();
+            PrintWriter writer;
+//            writer = new PrintWriter("../../../../granula-visualizer/archive/most-updated.xml", "UTF-8");
+//            writer.print(xml);
+//            writer.close();
 
-            writer = new PrintWriter(String.format("/home/wing/Workstation/Dropbox/Projects/Result/archive/%s.xml", workloadLog.getName()), "UTF-8");
+            writer = new PrintWriter(String.format("/home/wing/Workstation/Dropbox/Repo/granula/data/output/%s.xml", workloadLog.getName()), "UTF-8");
             writer.print(xml);
             writer.close();
         } catch (IOException e) {
