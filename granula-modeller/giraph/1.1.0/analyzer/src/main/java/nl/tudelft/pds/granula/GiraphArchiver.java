@@ -35,14 +35,11 @@ import java.util.*;
 /**
  * Created by wing on 2-2-15.
  */
-public class GranulaArchiver {
+public class GiraphArchiver {
 
     public static void main(String[] args) {
 
         long processTime = System.currentTimeMillis();
-
-        Notifier notifier = new Notifier();
-//        notifier.playMilestone();
 
         System.out.println(String.format("Archiving workload at: %s.", new Date(System.currentTimeMillis())));
 
