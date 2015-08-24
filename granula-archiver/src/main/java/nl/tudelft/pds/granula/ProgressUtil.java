@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by wing on 18-8-15.
  */
-public class GranularProcessUtil {
+public class ProgressUtil {
     private long startTime;
     private long endTime;
 

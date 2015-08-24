@@ -16,27 +16,25 @@
 
 package nl.tudelft.pds.granula;
 
-import nl.tudelft.pds.granula.archiver.archive.ArchiveBuilder;
+import nl.tudelft.pds.granula.archiver.archive.ArchiveManager;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
 import nl.tudelft.pds.granula.archiver.entity.operation.Workload;
-import nl.tudelft.pds.granula.archiver.hierachy.HierachyBuilder;
+import nl.tudelft.pds.granula.archiver.hierachy.HierachyManager;
 import nl.tudelft.pds.granula.archiver.log.LogManager;
 import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
 import nl.tudelft.pds.granula.archiver.record.JobRecord;
 import nl.tudelft.pds.granula.archiver.record.RecordManager;
 import nl.tudelft.pds.granula.modeller.fundamental.model.job.JobModel;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 
 /**
  * Created by wing on 2-2-15.
  */
-public class GranularArchiver {
+public class GranulaArchiver {
 
-    GranularProcessUtil granularProcessUtil;
+    ProgressUtil progressUtil;
 
     // inputs
     WorkloadLog workloadLog;
@@ -46,8 +44,8 @@ public class GranularArchiver {
     // managers
     LogManager logManager;
     RecordManager recordManager;
-    HierachyBuilder hierachyBuilder;
-    ArchiveBuilder archiveBuilder;
+    HierachyManager hierachyManager;
+    ArchiveManager archiveManager;
 
     // deliverables
     JobRecord jobRecord;
@@ -56,8 +54,8 @@ public class GranularArchiver {
 
 
 
-    public GranularArchiver(WorkloadLog workloadLog, JobModel jobModel, String outputPath) {
-        granularProcessUtil = new GranularProcessUtil();
+    public GranulaArchiver(WorkloadLog workloadLog, JobModel jobModel, String outputPath) {
+        progressUtil = new ProgressUtil();
         this.workloadLog = workloadLog;
         this.jobModel = jobModel;
         this.outputPath = outputPath;
@@ -65,19 +63,19 @@ public class GranularArchiver {
 
     public void archive() {
 
-        granularProcessUtil.setStartTime(System.currentTimeMillis());
+        progressUtil.setStartTime(System.currentTimeMillis());
         prepare();
 
-        granularProcessUtil.setDecompressionTime(System.currentTimeMillis());
+        progressUtil.setDecompressionTime(System.currentTimeMillis());
         assemble();
 
-        granularProcessUtil.setAssemblingTime(System.currentTimeMillis());
+        progressUtil.setAssemblingTime(System.currentTimeMillis());
         write();
 
-        granularProcessUtil.setWritingTime(System.currentTimeMillis());
+        progressUtil.setWritingTime(System.currentTimeMillis());
 
-        granularProcessUtil.setEndTime(System.currentTimeMillis());
-        granularProcessUtil.displayProcess();
+        progressUtil.setEndTime(System.currentTimeMillis());
+        progressUtil.displayProcess();
     }
 
 
@@ -93,9 +91,11 @@ public class GranularArchiver {
         recordManager = new RecordManager(job, workloadLog.getJobDataSources().get(0));
         recordManager.extract();
 
-        hierachyBuilder = new HierachyBuilder(job);
-        archiveBuilder = new ArchiveBuilder();
-        archiveBuilder.build(job);
+        hierachyManager = new HierachyManager(job);
+        hierachyManager.build();
+
+        archiveManager = new ArchiveManager();
+        archiveManager.build(job);
 
         workload = new Workload();
         workload.addJob(job);

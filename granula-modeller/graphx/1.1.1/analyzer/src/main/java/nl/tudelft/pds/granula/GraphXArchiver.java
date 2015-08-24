@@ -24,8 +24,8 @@ public class GraphXArchiver {
 //        String outputPath = String.format("/home/wing/Workstation/Dropbox/Repo/granula/data/output/graphx.xml", workloadLog.getName());
 
 
-        GranularArchiver granularArchiver = new GranularArchiver(workloadLog, new GraphX(), outputPath);
-        granularArchiver.archive();
+        GranulaArchiver granulaArchiver = new GranulaArchiver(workloadLog, new GraphX(), outputPath);
+        granulaArchiver.archive();
 
     }
 }

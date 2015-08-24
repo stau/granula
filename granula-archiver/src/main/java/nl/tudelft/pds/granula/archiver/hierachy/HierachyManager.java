@@ -33,23 +33,27 @@ import nl.tudelft.pds.granula.util.UuidGenerator;
 
 import java.util.*;
 
-public class HierachyBuilder {
+public class HierachyManager {
 
     JobRecord jobRecord;
     Job job;
 
-    public HierachyBuilder(Job job) {
+    public HierachyManager(Job job) {
         this.job = job;
         this.jobRecord = job.getJobRecord();
 
 
+
+
+    }
+
+    public void build() {
         buildEnvironment();
 
         initOperations();
         assembleOperations();
         fillOperations();
         linkOperations();
-
     }
 
     public void buildEnvironment() {

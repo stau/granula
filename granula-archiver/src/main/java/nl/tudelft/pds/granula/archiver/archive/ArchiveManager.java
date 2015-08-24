@@ -24,7 +24,7 @@ import nl.tudelft.pds.granula.modeller.fundamental.rule.visual.VisualizationRule
 
 import java.util.*;
 
-public class ArchiveBuilder {
+public class ArchiveManager {
 
     public void build(Job job) {
 

@@ -1,7 +1,6 @@
 package nl.tudelft.pds.granula;
 
 import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
-import nl.tudelft.pds.granula.archiver.record.RecordManager;
 import nl.tudelft.pds.granula.modeller.giraph.job.Giraph;
 
 import java.io.File;
@@ -25,8 +24,8 @@ public class GiraphArchiver {
 //        String outputPath = String.format(\"/home/wing/Workstation/Dropbox/Repo/granula/data/output/giraph.xml\", workloadLog.getName());
 
 
-        GranularArchiver granularArchiver = new GranularArchiver(workloadLog, new Giraph(), outputPath);
-        granularArchiver.archive();
+        GranulaArchiver granulaArchiver = new GranulaArchiver(workloadLog, new Giraph(), outputPath);
+        granulaArchiver.archive();
 
     }
 }
