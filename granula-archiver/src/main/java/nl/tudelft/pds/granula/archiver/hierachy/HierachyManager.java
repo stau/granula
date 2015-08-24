@@ -49,53 +49,6 @@ public class HierachyManager {
         linkOperations();
     }
 
-    public void buildEnvironment() {
-//        List<ResourceRecord> resourceRecords = jobRecord.getResourceRecords();
-//
-//        Set<String> envIds = new LinkedHashSet<>();
-//        Set<String> nodeIds = new LinkedHashSet<>();
-
-//        for (ResourceRecord resourceRecord : resourceRecords) {
-//            String sourceFilePath = resourceRecord.getRecordLocation().getLocation();
-//            String[] parentDirs = sourceFilePath.split("/");
-//            envIds.add(parentDirs[2]);
-//            nodeIds.add(parentDirs[3]);
-//        }
-
-//        if(envIds.size() != 1 || nodeIds.size() <= 0) {
-//            throw new IllegalStateException();
-//        }
-
-//        String envId = (String) envIds.toArray()[0];
-//        Environment env = new Environment(envId);
-//        for (String nodeId : nodeIds) {
-//            ComputationNode computationNode = new ComputationNode(nodeId);
-//            computationNode.addProcess(new Process("all"));
-//            env.addNode(computationNode);
-//
-//        }
-
-//        for (ResourceRecord resourceRecord : resourceRecords) {
-//            String sourceFilePath = resourceRecord.getRecordLocation().getLocation();
-//            String[] parentDirs = sourceFilePath.split("/");
-//            String nodeId = parentDirs[3];
-//            String[] fileNameParts = parentDirs[4].split("-");
-//            String processId = (fileNameParts.length > 1) ? fileNameParts[0] : "all";
-//            String rInfoName = ((fileNameParts.length > 1) ? fileNameParts[1] : fileNameParts[0]).replace(".rrd", "");
-//
-//            //System.out.println(String.format("%s, %s, %s", nodeId, processId, rInfoName));
-//
-//            TimeSeriesInfo timeSeriesInfo = new TimeSeriesInfo(rInfoName);
-//            Source source = new RecordSource(rInfoName, resourceRecord);
-//            timeSeriesInfo.addInfo("Bytes", resourceRecord.getTimeSeries(), source);
-//            env.addResourceInfo(timeSeriesInfo, nodeId);
-//
-//        }
-
-//        job.setEnvironment(env);
-
-    }
-
     public void initOperations() {
 
         for (Record record : job.getJobRecord().getRecords()) {
@@ -254,6 +207,54 @@ public class HierachyManager {
             uniqueSubActor.setParent(operations.get(0).getActor());
             linkActor(uniqueSubActor);
         }
+    }
+
+
+    public void buildEnvironment() {
+//        List<ResourceRecord> resourceRecords = jobRecord.getResourceRecords();
+//
+//        Set<String> envIds = new LinkedHashSet<>();
+//        Set<String> nodeIds = new LinkedHashSet<>();
+
+//        for (ResourceRecord resourceRecord : resourceRecords) {
+//            String sourceFilePath = resourceRecord.getRecordLocation().getLocation();
+//            String[] parentDirs = sourceFilePath.split("/");
+//            envIds.add(parentDirs[2]);
+//            nodeIds.add(parentDirs[3]);
+//        }
+
+//        if(envIds.size() != 1 || nodeIds.size() <= 0) {
+//            throw new IllegalStateException();
+//        }
+
+//        String envId = (String) envIds.toArray()[0];
+//        Environment env = new Environment(envId);
+//        for (String nodeId : nodeIds) {
+//            ComputationNode computationNode = new ComputationNode(nodeId);
+//            computationNode.addProcess(new Process("all"));
+//            env.addNode(computationNode);
+//
+//        }
+
+//        for (ResourceRecord resourceRecord : resourceRecords) {
+//            String sourceFilePath = resourceRecord.getRecordLocation().getLocation();
+//            String[] parentDirs = sourceFilePath.split("/");
+//            String nodeId = parentDirs[3];
+//            String[] fileNameParts = parentDirs[4].split("-");
+//            String processId = (fileNameParts.length > 1) ? fileNameParts[0] : "all";
+//            String rInfoName = ((fileNameParts.length > 1) ? fileNameParts[1] : fileNameParts[0]).replace(".rrd", "");
+//
+//            //System.out.println(String.format("%s, %s, %s", nodeId, processId, rInfoName));
+//
+//            TimeSeriesInfo timeSeriesInfo = new TimeSeriesInfo(rInfoName);
+//            Source source = new RecordSource(rInfoName, resourceRecord);
+//            timeSeriesInfo.addInfo("Bytes", resourceRecord.getTimeSeries(), source);
+//            env.addResourceInfo(timeSeriesInfo, nodeId);
+//
+//        }
+
+//        job.setEnvironment(env);
+
     }
 
 }
