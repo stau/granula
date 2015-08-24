@@ -38,6 +38,11 @@ public class WorkloadLog {
         this.tmpDirPath = String.format("%s/%s", tmpParentDirPath, name);
         jobDataSources = new ArrayList<>();
 
+
+
+    }
+
+    public void load() {
         List<File> jobLogDirs = Arrays.asList(new File(this.tmpDirPath + "/YarnLog/").listFiles());
 
         File utilLogDir = new File(this.tmpDirPath + "/GangliaLog/");
@@ -46,7 +51,6 @@ public class WorkloadLog {
         for (File jobLogDir : jobLogDirs) {
             jobDataSources.add(new JobDataSource(jobLogDir.getAbsolutePath(), utilLogDir.getAbsolutePath()));
         }
-
     }
 
     public String getName() {

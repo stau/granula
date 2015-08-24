@@ -18,6 +18,8 @@ package nl.tudelft.pds.granula.archiver.entity;
 
 import nl.tudelft.pds.granula.util.UuidGenerator;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  * Created by wing on 13-3-15.
  */
@@ -31,6 +33,7 @@ public abstract class Archivable {
         setUuid(UuidGenerator.getRandomUUID());
     }
 
+    @XmlAttribute
     public String getUuid() {
         return uuid;
     }
@@ -39,6 +42,7 @@ public abstract class Archivable {
         this.uuid = uuid;
     }
 
+    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -47,6 +51,7 @@ public abstract class Archivable {
         this.name = name;
     }
 
+    @XmlAttribute
     public String getType() {
         return type;
     }

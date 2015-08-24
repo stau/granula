@@ -21,11 +21,15 @@ import nl.tudelft.pds.granula.archiver.entity.environment.Environment;
 import nl.tudelft.pds.granula.archiver.source.record.Record;
 import nl.tudelft.pds.granula.archiver.source.record.RecordInfo;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@XmlAccessorType(XmlAccessType.NONE)
 public class Operation extends Entity {
 
     public Job job;

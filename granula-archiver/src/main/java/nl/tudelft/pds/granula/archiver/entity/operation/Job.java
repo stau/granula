@@ -20,12 +20,17 @@ import nl.tudelft.pds.granula.archiver.entity.Entity;
 import nl.tudelft.pds.granula.archiver.entity.environment.Environment;
 import nl.tudelft.pds.granula.archiver.source.record.JobRecord;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wing on 12-3-15.
  */
+@XmlAccessorType(XmlAccessType.NONE)
 public class Job extends Entity {
 
     JobRecord jobRecord;
@@ -78,6 +83,7 @@ public class Job extends Entity {
         return operation;
     }
 
+    @XmlElement(name="TopOperation")
     public Operation getTopOperation() {
         return topOperation;
     }

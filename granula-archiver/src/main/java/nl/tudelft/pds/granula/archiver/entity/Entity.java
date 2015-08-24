@@ -20,6 +20,8 @@ import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.visual.Visual;
 import nl.tudelft.pds.granula.modeller.model.Model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,11 +30,12 @@ import java.util.Map;
 /**
  * Created by wing on 5-2-15.
  */
+@XmlAccessorType(XmlAccessType.NONE)
 public abstract class Entity extends Archivable {
 
     protected Map<String, Info> infos;
     protected Map<String, Visual> visuals;
-    public Model model;
+    protected Model model;
 
     public Entity() {
         super();

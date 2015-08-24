@@ -12,15 +12,18 @@ import java.util.Arrays;
 public class GiraphArchiver {
     public static void main(String[] args) {
 
-        String workloadDirPath = "/home/wing/Workstation/Dropbox/Repo/granula/data/input/";
+
+        String repoPath = "/home/wlngai/Workstation/Dropbox/Repo/granula";
+
+        String workloadDirPath = repoPath + "/data/input/";
         File workloadDir = new File(workloadDirPath);
         File[] workloadFiles = workloadDir.listFiles();
         Arrays.sort(workloadFiles);
         File workloadFile =workloadFiles[workloadFiles.length - 1];
-        workloadFile = new File("/home/wing/Workstation/Dropbox/Repo/granula/data/input/giraph.tar.gz");
+        workloadFile = new File(repoPath + "/data/input/giraph.tar.gz");
         WorkloadLog workloadLog = new WorkloadLog(workloadFile.getName().replace(".tar.gz", ""), workloadDirPath + workloadFile.getName());
 
-        String outputPath = "/home/wing/Workstation/Dropbox/Repo/granula/granula-visualizer/archive/most-updated.xml";
+        String outputPath = repoPath + "/granula-visualizer/archive/most-updated.xml";
 //        String outputPath = String.format(\"/home/wing/Workstation/Dropbox/Repo/granula/data/output/giraph.xml\", workloadLog.getName());
 
 

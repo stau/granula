@@ -18,13 +18,17 @@ package nl.tudelft.pds.granula.archiver.entity.operation;
 
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wing on 12-3-15.
  */
+@XmlRootElement(name="Workload")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Workload extends Entity {
+
 
     List<Job> jobs;
 
@@ -37,6 +41,8 @@ public class Workload extends Entity {
         this.jobs.add(job);
     }
 
+    @XmlElements({@XmlElement(name="Job", type=Job.class)})
+    @XmlElementWrapper(name="Jobs")
     public List<Job> getJobs() {
         return jobs;
     }
