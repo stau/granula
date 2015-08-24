@@ -14,27 +14,17 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.archiver.record;
+package nl.tudelft.pds.granula.archiver.source.record;
 
-import nl.tudelft.pds.granula.archiver.entity.info.TimeSeries;
+public class RecordInfo {
+    public static String InfoName = "InfoName";
+    public static String InfoValue = "InfoValue";
+    public static String Timestamp = "Timestamp";
+    public static String RecordUuid = "RecordUuid";
 
-/**
- * Created by wing on 26-2-15.
- */
-public class ResourceRecord extends Record {
-
-    TimeSeries timeSeries;
-
-    public ResourceRecord() {
-        this.timeSeries = new TimeSeries();
-    }
-
-    public TimeSeries getTimeSeries() {
-        return timeSeries;
-    }
-
-    public void setTimeSeries(TimeSeries timeSeries) {
-        this.timeSeries = timeSeries;
-    }
-
+    public static String OperationUuid = "OperationUuid";
+    public static String ActorType = "ActorType";
+    public static String ActorId = "ActorId";
+    public static String MissionType = "MissionType";
+    public static String MissionId = "MissionId";
 }

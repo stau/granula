@@ -1,6 +1,6 @@
 package nl.tudelft.pds.granula.modeller.rule.extraction;
 
-import nl.tudelft.pds.granula.archiver.record.Record;
+import nl.tudelft.pds.granula.archiver.source.record.Record;
 import nl.tudelft.pds.granula.modeller.rule.Rule;
 
 import java.io.File;

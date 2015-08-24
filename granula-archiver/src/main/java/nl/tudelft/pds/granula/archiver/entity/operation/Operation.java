@@ -18,8 +18,8 @@ package nl.tudelft.pds.granula.archiver.entity.operation;
 
 import nl.tudelft.pds.granula.archiver.entity.*;
 import nl.tudelft.pds.granula.archiver.entity.environment.Environment;
-import nl.tudelft.pds.granula.archiver.record.Record;
-import nl.tudelft.pds.granula.archiver.record.RecordInfo;
+import nl.tudelft.pds.granula.archiver.source.record.Record;
+import nl.tudelft.pds.granula.archiver.source.record.RecordInfo;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

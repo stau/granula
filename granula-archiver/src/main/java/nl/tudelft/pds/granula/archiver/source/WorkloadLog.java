@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.archiver.log;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.TrueFileFilter;
+package nl.tudelft.pds.granula.archiver.source;
 
 import java.io.File;
 import java.util.ArrayList;

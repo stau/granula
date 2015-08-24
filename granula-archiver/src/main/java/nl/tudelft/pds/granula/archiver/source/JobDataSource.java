@@ -1,4 +1,4 @@
-package nl.tudelft.pds.granula.archiver.log;
+package nl.tudelft.pds.granula.archiver.source;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;

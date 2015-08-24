@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.archiver.log;
+package nl.tudelft.pds.granula.archiver.source;
 
 import nl.tudelft.pds.granula.util.TarExtractor;
 import org.apache.commons.io.FileUtils;

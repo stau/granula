@@ -1,6 +1,6 @@
 package nl.tudelft.pds.granula;
 
-import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
+import nl.tudelft.pds.granula.archiver.source.WorkloadLog;
 import nl.tudelft.pds.granula.modeller.giraph.job.Giraph;
 
 import java.io.File;

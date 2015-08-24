@@ -1,4 +1,4 @@
-package nl.tudelft.pds.granula.archiver.log;
+package nl.tudelft.pds.granula.archiver.source;
 
 /**
  * Created by wing on 24-8-15.

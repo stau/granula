@@ -16,7 +16,7 @@
 
 package nl.tudelft.pds.granula.archiver.entity.info;
 
-import nl.tudelft.pds.granula.archiver.record.Record;
+import nl.tudelft.pds.granula.archiver.source.record.Record;
 
 /**
  * Created by wing on 26-2-15.

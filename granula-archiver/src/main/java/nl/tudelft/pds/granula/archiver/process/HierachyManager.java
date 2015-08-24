@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.archiver.hierachy;
+package nl.tudelft.pds.granula.archiver.process;
 
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 import nl.tudelft.pds.granula.archiver.entity.operation.Actor;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
 import nl.tudelft.pds.granula.archiver.entity.operation.Mission;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
-import nl.tudelft.pds.granula.archiver.record.Record;
-import nl.tudelft.pds.granula.archiver.record.RecordInfo;
+import nl.tudelft.pds.granula.archiver.source.record.Record;
+import nl.tudelft.pds.granula.archiver.source.record.RecordInfo;
 import nl.tudelft.pds.granula.modeller.model.job.JobModel;
 import nl.tudelft.pds.granula.modeller.model.operation.OperationModel;
 import nl.tudelft.pds.granula.modeller.rule.assembling.AssemblingRule;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.archiver.record;
+package nl.tudelft.pds.granula.archiver.source.record;
 
 /**
  * Created by wing on 2-2-15.

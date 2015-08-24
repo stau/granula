@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.archiver.record;
+package nl.tudelft.pds.granula.archiver.process;
 
 import nl.tudelft.pds.granula.archiver.entity.info.TimeSeries;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
-import nl.tudelft.pds.granula.archiver.log.JobDataSource;
+import nl.tudelft.pds.granula.archiver.source.JobDataSource;
+import nl.tudelft.pds.granula.archiver.source.record.JobRecord;
+import nl.tudelft.pds.granula.archiver.source.record.Record;
+import nl.tudelft.pds.granula.archiver.source.record.RecordLocation;
+import nl.tudelft.pds.granula.archiver.source.record.ResourceRecord;
 import nl.tudelft.pds.granula.modeller.model.job.JobModel;
 import nl.tudelft.pds.granula.modeller.rule.extraction.ExtractionRule;
 import nl.tudelft.pds.granula.util.RrdManager;

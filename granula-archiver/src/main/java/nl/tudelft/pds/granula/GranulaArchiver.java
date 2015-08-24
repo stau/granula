@@ -16,14 +16,14 @@
 
 package nl.tudelft.pds.granula;
 
-import nl.tudelft.pds.granula.archiver.archive.ArchiveManager;
+import nl.tudelft.pds.granula.archiver.process.ArchiveManager;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
 import nl.tudelft.pds.granula.archiver.entity.operation.Workload;
-import nl.tudelft.pds.granula.archiver.hierachy.HierachyManager;
-import nl.tudelft.pds.granula.archiver.log.LogManager;
-import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
-import nl.tudelft.pds.granula.archiver.record.JobRecord;
-import nl.tudelft.pds.granula.archiver.record.RecordManager;
+import nl.tudelft.pds.granula.archiver.process.HierachyManager;
+import nl.tudelft.pds.granula.archiver.source.LogManager;
+import nl.tudelft.pds.granula.archiver.source.WorkloadLog;
+import nl.tudelft.pds.granula.archiver.source.record.JobRecord;
+import nl.tudelft.pds.granula.archiver.process.RecordManager;
 import nl.tudelft.pds.granula.modeller.model.job.JobModel;
 import nl.tudelft.pds.granula.util.ProgressUtil;
 

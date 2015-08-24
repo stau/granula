@@ -18,7 +18,7 @@ package nl.tudelft.pds.granula.archiver.entity.operation;
 
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 import nl.tudelft.pds.granula.archiver.entity.environment.Environment;
-import nl.tudelft.pds.granula.archiver.record.JobRecord;
+import nl.tudelft.pds.granula.archiver.source.record.JobRecord;
 
 import java.util.ArrayList;
 import java.util.List;

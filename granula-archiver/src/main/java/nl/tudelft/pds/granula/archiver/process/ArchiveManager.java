@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.archiver.archive;
+package nl.tudelft.pds.granula.archiver.process;
 
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
