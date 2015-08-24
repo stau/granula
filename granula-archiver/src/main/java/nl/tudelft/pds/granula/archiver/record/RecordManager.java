@@ -18,6 +18,8 @@ package nl.tudelft.pds.granula.archiver.record;
 
 import nl.tudelft.pds.granula.archiver.entity.info.TimeSeries;
 import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
+import nl.tudelft.pds.granula.modeller.fundamental.model.job.JobModel;
+import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
 import nl.tudelft.pds.granula.util.RrdManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -33,10 +35,13 @@ import java.util.List;
 public class RecordManager {
 
     protected WorkloadLog workloadLog;
+    protected JobModel jobModel;
 
-    public RecordManager(WorkloadLog workloadLog) {
+    public RecordManager(WorkloadLog workloadLog, JobModel jobModel) {
         this.workloadLog = workloadLog;
+        this.jobModel = jobModel;
     }
+
 
     public List<JobRecord> extract() {
 
@@ -140,12 +145,12 @@ public class RecordManager {
 
 
     public List<Record> extractRecordFromFile(File file) {
-        return null;
+        jobModel.loadRules();
+        ExtractionRule extractionRule = jobModel.getExtractionRules().get(0);
+        jobModel.unloadRules();
+        return extractionRule.extractRecordFromFile(file);
     }
 
-    public Record extractRecord(String line) {
-        return null;
-    }
 
 
 }

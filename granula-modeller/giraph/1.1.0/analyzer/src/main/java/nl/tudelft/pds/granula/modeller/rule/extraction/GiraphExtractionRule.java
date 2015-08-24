@@ -1,42 +1,30 @@
-/*
- * Copyright 2015 Delft University of Technology
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+package nl.tudelft.pds.granula.modeller.rule.extraction;
 
-package nl.tudelft.pds.granula;
-
-import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
 import nl.tudelft.pds.granula.archiver.record.Record;
 import nl.tudelft.pds.granula.archiver.record.RecordLocation;
-import nl.tudelft.pds.granula.archiver.record.RecordManager;
+import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wing on 8-7-15.
+ * Created by wing on 21-8-15.
  */
-public class GraphXRecordManager extends RecordManager {
+public class GiraphExtractionRule extends ExtractionRule {
 
-    public GraphXRecordManager(WorkloadLog workloadLog) {
-        super(workloadLog);
+    public GiraphExtractionRule(int level) {
+        super(level);
+    }
+
+    @Override
+    public boolean execute() {
+        return false;
     }
 
     public List<Record> extractRecordFromFile(File file) {
 
-        List<Record> granularlogList = new ArrayList<>();
+        List<Record> granulalogList = new ArrayList<>();
 
         try {
             FileInputStream fis = new FileInputStream(file);
@@ -50,20 +38,26 @@ public class GraphXRecordManager extends RecordManager {
                     Record record = extractRecord(line);
 
                     RecordLocation trace = new RecordLocation();
+                    String codeLocation = "";
 
-                    String codeLocation;
-                    String logFilePath;
-                    if(false) { //TODO if supported
-                        codeLocation = line.split("\\) - Granular")[0].split(" \\(")[1];
+                    String[] lineParts = line.split("\\) - Granular");
+                    if(lineParts.length > 1) {
+                        String[] prefixParts = lineParts[0].split(" \\(");
+                        if(prefixParts.length > 1) {
+                            codeLocation = prefixParts[1];
+                        }
+                    } else {
+                        String[] driverLineParts = line.split("\\s+");
+                        if(driverLineParts.length > 3) {
+                            codeLocation = driverLineParts[3].replace(":", "");
+                        }
                     }
 
-                    codeLocation = "";
-                    logFilePath = "YarnLog/" + file.getAbsolutePath().split("YarnLog/")[1];
-
+                    String logFilePath = "YarnLog/" + file.getAbsolutePath().split("YarnLog/")[1];
                     trace.setLocation(logFilePath, lineCount, codeLocation);
                     record.setRecordLocation(trace);
 
-                    granularlogList.add(record);
+                    granulalogList.add(record);
                 }
             }
 
@@ -73,14 +67,14 @@ public class GraphXRecordManager extends RecordManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return granularlogList;
+        return granulalogList;
     }
 
     public Record extractRecord(String line) {
         Record record = new Record();
 
-        String granularLog = line.split("Granular - ")[1];
-        String[] recordAttrs = granularLog.split("\\s+");
+        String granulaLog = line.split("Granular")[1];
+        String[] recordAttrs = granulaLog.split("\\s+");
 
         for (String recordAttr : recordAttrs) {
             if (recordAttr.contains(":")) {
@@ -89,7 +83,7 @@ public class GraphXRecordManager extends RecordManager {
 
                     String name = attrKeyValue[0];
                     String value = attrKeyValue[1];
-                    String unescapedValue = value.replaceAll("\\[COLON\\]", ":").replaceAll("\\[SPACE\\]", " ");
+                    String unescapedValue = value.replaceAll("\\[COLON\\]", ":");
 
                     record.addRecordInfo(name, unescapedValue);
                 } else {
@@ -99,6 +93,4 @@ public class GraphXRecordManager extends RecordManager {
         }
         return record;
     }
-
-
 }

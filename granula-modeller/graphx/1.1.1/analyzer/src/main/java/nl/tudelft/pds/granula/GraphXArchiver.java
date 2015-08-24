@@ -1,8 +1,7 @@
 package nl.tudelft.pds.granula;
 
 import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
-import nl.tudelft.pds.granula.archiver.record.RecordManager;
-import nl.tudelft.pds.granula.modeller.giraph.job.Giraph;
+import nl.tudelft.pds.granula.modeller.graphx.job.GraphX;
 
 import java.io.File;
 import java.util.Arrays;
@@ -10,7 +9,7 @@ import java.util.Arrays;
 /**
  * Created by wing on 21-8-15.
  */
-public class GiraphArchiver {
+public class GraphXArchiver {
     public static void main(String[] args) {
 
         String workloadDirPath = "/home/wing/Workstation/Dropbox/Repo/granula/data/input/";
@@ -18,14 +17,14 @@ public class GiraphArchiver {
         File[] workloadFiles = workloadDir.listFiles();
         Arrays.sort(workloadFiles);
         File workloadFile =workloadFiles[workloadFiles.length - 1];
-        workloadFile = new File("/home/wing/Workstation/Dropbox/Repo/granula/data/input/giraph.tar.gz");
+        workloadFile = new File("/home/wing/Workstation/Dropbox/Repo/granula/data/input/graphx.tar.gz");
         WorkloadLog workloadLog = new WorkloadLog(workloadFile.getName().replace(".tar.gz", ""), workloadDirPath + workloadFile.getName());
 
         String outputPath = "/home/wing/Workstation/Dropbox/Repo/granula/granula-visualizer/archive/most-updated.xml";
-//        String outputPath = String.format(\"/home/wing/Workstation/Dropbox/Repo/granula/data/output/giraph.xml\", workloadLog.getName());
+//        String outputPath = String.format("/home/wing/Workstation/Dropbox/Repo/granula/data/output/graphx.xml", workloadLog.getName());
 
 
-        GranularArchiver granularArchiver = new GranularArchiver(workloadLog, new Giraph(), outputPath);
+        GranularArchiver granularArchiver = new GranularArchiver(workloadLog, new GraphX(), outputPath);
         granularArchiver.archive();
 
     }

@@ -22,8 +22,10 @@ import nl.tudelft.pds.granula.archiver.entity.operation.Job;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
 import nl.tudelft.pds.granula.modeller.fundamental.model.job.JobModel;
 import nl.tudelft.pds.granula.modeller.fundamental.rule.derivation.DerivationRule;
+import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
 import nl.tudelft.pds.granula.modeller.giraph.operation.*;
 import nl.tudelft.pds.granula.modeller.giraph.GiraphType;
+import nl.tudelft.pds.granula.modeller.rule.extraction.GiraphExtractionRule;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -72,9 +74,10 @@ public class Giraph extends JobModel {
     }
 
     public void loadRules() {
-        super.loadRules();
         addInfoDerivation(new JobNameDerivationRule(2));
+        addExtraction(new GiraphExtractionRule(1));
     }
+
 
 
     protected class JobNameDerivationRule extends DerivationRule {

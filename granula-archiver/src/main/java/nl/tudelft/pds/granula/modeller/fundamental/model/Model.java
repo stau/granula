@@ -18,6 +18,7 @@ package nl.tudelft.pds.granula.modeller.fundamental.model;
 
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 import nl.tudelft.pds.granula.modeller.fundamental.rule.derivation.DerivationRule;
+import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
 import nl.tudelft.pds.granula.modeller.fundamental.rule.filling.FillingRule;
 import nl.tudelft.pds.granula.modeller.fundamental.rule.visual.VisualizationRule;
 

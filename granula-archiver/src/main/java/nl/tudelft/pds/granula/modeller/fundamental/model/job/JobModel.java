@@ -18,9 +18,12 @@ package nl.tudelft.pds.granula.modeller.fundamental.model.job;
 
 import nl.tudelft.pds.granula.modeller.fundamental.model.Model;
 import nl.tudelft.pds.granula.modeller.fundamental.model.operation.OperationModel;
+import nl.tudelft.pds.granula.modeller.fundamental.rule.derivation.DerivationRule;
+import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,14 +31,24 @@ import java.util.Map;
  */
 public abstract class JobModel extends Model {
     Map<String, OperationModel> operationModelMap;
+    protected List<ExtractionRule> extractionRules;
 
     public JobModel() {
         this.operationModelMap = new LinkedHashMap<String, OperationModel>();
         infoDerivationRules = new ArrayList<>();
+        extractionRules = new ArrayList<>();
     }
 
-    public void loadRules() {
+    public void addExtraction(ExtractionRule extractionRule) {
+        extractionRules.add(extractionRule);
+        extractionRule.setEntity(entity);
     }
+
+    public List<ExtractionRule> getExtractionRules() {
+        return extractionRules;
+    }
+
+    public abstract void loadRules();
 
 //    public boolean deriveInfos(Job job, int derivationLevel) {
 //        boolean allDerivationDone = true;
@@ -60,5 +73,11 @@ public abstract class JobModel extends Model {
             System.out.println(String.format("Cannot find operation type: %s", operationType));
             throw new IllegalStateException();
         }
+    }
+
+    public void unloadRules() {
+        infoDerivationRules = new ArrayList<>();
+        extractionRules = new ArrayList<>();
+        fillingRules = new ArrayList<>();
     }
 }

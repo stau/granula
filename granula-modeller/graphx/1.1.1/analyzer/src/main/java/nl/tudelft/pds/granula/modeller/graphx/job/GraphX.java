@@ -25,6 +25,7 @@ import nl.tudelft.pds.granula.modeller.fundamental.rule.derivation.DerivationRul
 import nl.tudelft.pds.granula.modeller.fundamental.rule.filling.UniqueOperationFilling;
 import nl.tudelft.pds.granula.modeller.graphx.GraphXType;
 import nl.tudelft.pds.granula.modeller.graphx.operation.*;
+import nl.tudelft.pds.granula.modeller.rule.GraphXExtractionRule;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -62,7 +63,6 @@ public class GraphX extends JobModel {
     }
 
     public void loadRules() {
-        super.loadRules();
 
         addFillingRule(new UniqueOperationFilling(2, GraphXType.TopActor, GraphXType.TopMission));
         addFillingRule(new UniqueOperationFilling(2, GraphXType.Coordinator, GraphXType.Setup));
@@ -72,6 +72,7 @@ public class GraphX extends JobModel {
         addFillingRule(new UniqueOperationFilling(2, GraphXType.SparkApplication, GraphXType.Execution));
 
         addInfoDerivation(new JobNameDerivationRule(4));
+        addExtraction(new GraphXExtractionRule(1));
     }
 
 
