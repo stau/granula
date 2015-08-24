@@ -26,7 +26,6 @@ import java.util.List;
  * Created by wing on 12-3-15.
  */
 @XmlRootElement(name="Workload")
-@XmlAccessorType(XmlAccessType.NONE)
 public class Workload extends Entity {
 
 
@@ -42,7 +41,6 @@ public class Workload extends Entity {
     }
 
     @XmlElements({@XmlElement(name="Job", type=Job.class)})
-    @XmlElementWrapper(name="Jobs")
     public List<Job> getJobs() {
         return jobs;
     }

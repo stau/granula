@@ -539,7 +539,7 @@ function TimeSeriesVisual(tsVisualNode) {
             y1Timelines = y1TSInfos.map( function () {
                 var tsInfo = $(this);
                 var timeline = new Timeline(tsInfo.attr("name"), tsInfo.children("MetricUnit").text(), 1);
-                var dps = tsInfo.children("Data").map(function() { timeline.addDatapoint($(this).attr("t"), $(this).attr("v")) });
+                var dps = tsInfo.children("TimeSeries").children("Data").map(function() { timeline.addDatapoint($(this).attr("t"), $(this).attr("v")) });
                 return timeline;
             }).get();
         }
@@ -552,7 +552,7 @@ function TimeSeriesVisual(tsVisualNode) {
             y2Timelines = y2TSInfos.map( function () {
                 var tsInfo = $(this);
                 var timeline = new Timeline(tsInfo.attr("name"), tsInfo.children("MetricUnit").text(), 2);
-                var dps = tsInfo.children("Data").map(function() { timeline.addDatapoint($(this).attr("t"), $(this).attr("v")) });
+                var dps = tsInfo.children("TimeSeries").children("Data").map(function() { timeline.addDatapoint($(this).attr("t"), $(this).attr("v")) });
                 return timeline;
             }).get();
         }

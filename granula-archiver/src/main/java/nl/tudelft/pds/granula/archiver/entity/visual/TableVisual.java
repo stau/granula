@@ -17,8 +17,13 @@
 package nl.tudelft.pds.granula.archiver.entity.visual;
 
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
+import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
+import nl.tudelft.pds.granula.archiver.entity.info.RecordSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +46,6 @@ public class TableVisual extends Visual {
         tblCells.add(new TableCell(source));
     }
 
-
     public String export() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid));
@@ -56,17 +60,28 @@ public class TableVisual extends Visual {
         return stringBuilder.toString();
     }
 
+    @XmlElements({
+            @XmlElement(name="TableCell", type=TableCell.class)
+    })
+    public List<TableCell> getTblCells() {
+        return tblCells;
+    }
+
     public String exportBasic() {
         return String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid);
     }
 
-    private class TableCell {
+    private static class TableCell {
          Source source;
 
         public TableCell(Source source) {
             this.source = source;
         }
 
+        @XmlElements({
+                @XmlElement(name="Source", type=InfoSource.class),
+                @XmlElement(name="Source", type=RecordSource.class)
+        })
         public Source getSource() {
             return source;
         }

@@ -18,6 +18,7 @@ package nl.tudelft.pds.granula.archiver.entity.operation;
 
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class Mission extends Entity {
         operations.add(operation);
     }
 
+    @XmlAttribute
     public String getId() {
         return id;
     }

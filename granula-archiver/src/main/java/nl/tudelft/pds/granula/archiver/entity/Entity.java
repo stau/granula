@@ -17,11 +17,17 @@
 package nl.tudelft.pds.granula.archiver.entity;
 
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
+import nl.tudelft.pds.granula.archiver.entity.info.SummaryInfo;
+import nl.tudelft.pds.granula.archiver.entity.info.TimeSeries;
+import nl.tudelft.pds.granula.archiver.entity.info.TimeSeriesInfo;
+import nl.tudelft.pds.granula.archiver.entity.operation.Job;
+import nl.tudelft.pds.granula.archiver.entity.visual.SummaryVisual;
+import nl.tudelft.pds.granula.archiver.entity.visual.TableVisual;
+import nl.tudelft.pds.granula.archiver.entity.visual.TimeSeriesVisual;
 import nl.tudelft.pds.granula.archiver.entity.visual.Visual;
 import nl.tudelft.pds.granula.modeller.model.Model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -47,6 +53,13 @@ public abstract class Entity extends Archivable {
         infos.put(info.getName(), info);
     }
 
+
+    @XmlElements({
+            @XmlElement(name="Info", type=Info.class),
+            @XmlElement(name="Info", type=SummaryInfo.class),
+            @XmlElement(name="Info", type=TimeSeriesInfo.class),
+    })
+    @XmlElementWrapper(name="Infos")
     public List<Info> getInfos() {
         return new ArrayList<>(infos.values());
     }
@@ -68,6 +81,12 @@ public abstract class Entity extends Archivable {
         visuals.put(visual.getName(), visual);
     }
 
+    @XmlElements({
+            @XmlElement(name="Visual", type=SummaryVisual.class),
+            @XmlElement(name="Visual", type=TableVisual.class),
+            @XmlElement(name="Visual", type=TimeSeriesVisual.class),
+    })
+    @XmlElementWrapper(name="Visuals")
     public List<Visual> getVisuals() { return new ArrayList<>(visuals.values()); }
 
     public Model getModel() {

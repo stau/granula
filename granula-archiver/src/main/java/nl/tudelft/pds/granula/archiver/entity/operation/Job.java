@@ -20,17 +20,14 @@ import nl.tudelft.pds.granula.archiver.entity.Entity;
 import nl.tudelft.pds.granula.archiver.entity.environment.Environment;
 import nl.tudelft.pds.granula.archiver.source.record.JobRecord;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wing on 12-3-15.
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Job extends Entity {
 
     JobRecord jobRecord;
@@ -39,6 +36,7 @@ public class Job extends Entity {
     Mission topMission;
     Environment environment;
     List<Operation> memberOperations;
+    List<Operation> operations;
 
     public Job() {
         super();
@@ -51,6 +49,17 @@ public class Job extends Entity {
         setTopActor(topActor);
         setTopMission(topMission);
         setEnvironment(environment);
+    }
+
+    public void fillOperation() {
+        operations = new ArrayList<>();
+        operations.add(topOperation);
+    }
+
+    @XmlElements({@XmlElement(name="Operation", type=Operation.class)})
+    @XmlElementWrapper(name="Operations")
+    public List<Operation> getOperations() {
+        return operations;
     }
 
     public JobRecord getJobRecord() {
@@ -83,7 +92,6 @@ public class Job extends Entity {
         return operation;
     }
 
-    @XmlElement(name="TopOperation")
     public Operation getTopOperation() {
         return topOperation;
     }

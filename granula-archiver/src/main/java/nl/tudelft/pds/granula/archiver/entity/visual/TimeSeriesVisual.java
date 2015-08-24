@@ -18,11 +18,11 @@ package nl.tudelft.pds.granula.archiver.entity.visual;
 
 import nl.tudelft.pds.granula.archiver.entity.Archivable;
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
-import nl.tudelft.pds.granula.archiver.entity.info.Info;
-import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
-import nl.tudelft.pds.granula.archiver.entity.info.Source;
-import nl.tudelft.pds.granula.archiver.entity.info.TimeSeriesInfo;
+import nl.tudelft.pds.granula.archiver.entity.info.*;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +40,8 @@ public class TimeSeriesVisual extends Visual {
         super(name, Identifier.TimeSeriesVisual);
         title = "Unspecified Title";
     }
+
+
 
     public String export() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -69,6 +71,26 @@ public class TimeSeriesVisual extends Visual {
 
     public String exportBasic() {
         return String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\" />", type, name, uuid);
+    }
+
+    @XmlElement(name="Title")
+    public String getTitle() {
+        return title;
+    }
+
+    @XmlElement(name="Axis")
+    public Axis getXAxis() {
+        return xAxis;
+    }
+
+    @XmlElement(name="Axis")
+    public Axis getY1Axis() {
+        return y1Axis;
+    }
+
+    @XmlElement(name="Axis")
+    public Axis getY2Axis() {
+        return y2Axis;
     }
 
     public void setTitle(String title) {
@@ -111,7 +133,7 @@ public class TimeSeriesVisual extends Visual {
         this.y2Axis.addTimeSeriesInfo(timeSeriesInfo);
     }
 
-    private class Axis extends Archivable {
+    private static class Axis extends Archivable {
 
         String title;
         String unit;
@@ -138,20 +160,33 @@ public class TimeSeriesVisual extends Visual {
             tsSources = new ArrayList<>();
         }
 
+        @XmlElement(name="Title")
         public String getTitle() {
             return title;
         }
 
+        @XmlElement(name="Unit")
         public String getUnit() {
             return unit;
         }
 
+        @XmlElement(name="StartValue")
         public String getStartValue() {
             return startValue;
         }
 
+        @XmlElement(name="EndValue")
         public String getEndValue() {
             return endValue;
+        }
+
+        @XmlElements({
+                @XmlElement(name="Source", type=InfoSource.class),
+                @XmlElement(name="Source", type=RecordSource.class)
+        })
+        @XmlElementWrapper(name="TimeSeriesSources")
+        public List<Source> getTsSources() {
+            return tsSources;
         }
 
         public void addTimeSeriesInfo(TimeSeriesInfo timeSeriesInfo) {

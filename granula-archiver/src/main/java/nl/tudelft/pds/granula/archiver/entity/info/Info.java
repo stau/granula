@@ -20,6 +20,10 @@ import nl.tudelft.pds.granula.ArchiverConfiguration;
 import nl.tudelft.pds.granula.archiver.entity.Attribute;
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import java.util.List;
 
 public class Info extends Attribute {
@@ -67,6 +71,7 @@ public class Info extends Attribute {
         return stringBuilder.toString();
     }
 
+    @XmlAttribute
     public String getValue() {
         return value;
     }
@@ -75,6 +80,11 @@ public class Info extends Attribute {
         this.value = value;
     }
 
+    @XmlElements({
+            @XmlElement(name="Source", type=InfoSource.class),
+            @XmlElement(name="Source", type=RecordSource.class)
+    })
+    @XmlElementWrapper(name="Sources")
     public List<Source> getSources() {
         return sources;
     }
@@ -83,6 +93,7 @@ public class Info extends Attribute {
         sources.add(source);
     }
 
+    @XmlElement(name="Description")
     public String getDescription() {
         return description;
     }

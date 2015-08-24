@@ -18,6 +18,9 @@ package nl.tudelft.pds.granula.archiver.entity.info;
 
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import java.util.List;
 
 /**
@@ -38,8 +41,18 @@ public class SummaryInfo extends Info {
         }
     }
 
+    @XmlElement(name="Summary")
     public String getSummary() {
         return summary;
+    }
+
+    @XmlElements({
+            @XmlElement(name="Source", type=InfoSource.class),
+            @XmlElement(name="Source", type=RecordSource.class)
+    })
+    @XmlElementWrapper(name="Sources")
+    public List<Source> getSources() {
+        return sources;
     }
 
     public String exportBasic() {

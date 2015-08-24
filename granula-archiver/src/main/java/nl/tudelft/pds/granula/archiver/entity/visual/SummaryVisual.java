@@ -17,17 +17,26 @@
 package nl.tudelft.pds.granula.archiver.entity.visual;
 
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
+import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
+import nl.tudelft.pds.granula.archiver.entity.info.RecordSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wing on 16-3-15.
  */
 public class SummaryVisual extends Visual {
 
-    Source summarySource;
+    List<Source> summarySources;
 
     public SummaryVisual(String name) {
         super(name, Identifier.SummaryVisual);
+        summarySources = new ArrayList<>();
     }
 
     public String export() {
@@ -35,7 +44,9 @@ public class SummaryVisual extends Visual {
         stringBuilder.append(String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid));
 
         stringBuilder.append("<SummarySource>");
-        stringBuilder.append(summarySource.export());
+        for (Source summarySource : summarySources) {
+            stringBuilder.append(summarySource.export());
+        }
         stringBuilder.append("</SummarySource>");
 
         stringBuilder.append("<Sources>");
@@ -48,12 +59,30 @@ public class SummaryVisual extends Visual {
         return stringBuilder.toString();
     }
 
+    @XmlElements({
+            @XmlElement(name="Source", type=InfoSource.class),
+            @XmlElement(name="Source", type=RecordSource.class)
+    })
+    @XmlElementWrapper(name="SummarySource")
+    public List<Source> getSummarySources() {
+        return summarySources;
+    }
+
     public String exportBasic() {
         return String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid);
     }
 
-    public void setSummarySource(Source summarySource) {
+    public void addSummarySources(Source summarySource) {
         sources.add(summarySource);
-        this.summarySource = summarySource;
+        summarySources.add(summarySource);
+    }
+
+    @XmlElements({
+            @XmlElement(name="Source", type=InfoSource.class),
+            @XmlElement(name="Source", type=RecordSource.class)
+    })
+    @XmlElementWrapper(name="Sources")
+    public List<Source> getSources() {
+        return sources;
     }
 }

@@ -18,6 +18,7 @@ package nl.tudelft.pds.granula.archiver.entity.info;
 
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 /**
@@ -49,6 +50,7 @@ public class TimeSeriesInfo extends Info {
         addSource(source);
     }
 
+    @XmlElement(name="TimeSeries")
     public TimeSeries getTimeSeries() {
         return timeSeries;
     }

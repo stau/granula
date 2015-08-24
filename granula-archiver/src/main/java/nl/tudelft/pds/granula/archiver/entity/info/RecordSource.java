@@ -18,6 +18,8 @@ package nl.tudelft.pds.granula.archiver.entity.info;
 
 import nl.tudelft.pds.granula.archiver.source.record.Record;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  * Created by wing on 26-2-15.
  */
@@ -29,6 +31,11 @@ public class RecordSource extends Source {
         this.name = name;
         this.type = "RecordSource";
         this.location = record.getRecordLocation().getLocation();
+    }
+
+    @XmlAttribute
+    public String getLocation() {
+        return location;
     }
 
     @Override

@@ -18,10 +18,13 @@ package nl.tudelft.pds.granula.archiver.entity;
 
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Attribute extends Archivable {
+
     protected List<Source> sources;
 
     public Attribute(String name, String type) {

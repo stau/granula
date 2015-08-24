@@ -32,6 +32,7 @@ import nl.tudelft.pds.granula.util.XMLFormatter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -119,24 +120,25 @@ public class GranulaArchiver {
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            jaxbMarshaller.marshal(workload, System.out);
+//            jaxbMarshaller.marshal(workload, System.out);
+            jaxbMarshaller.marshal(workload, new File(outputPath));
 
         } catch (JAXBException e) {
             e.printStackTrace();
         }
 
-        String xml = workload.export();
-      xml = XMLFormatter.format(workload.export());
-
-        try {
-            PrintWriter writer;
-            writer = new PrintWriter(outputPath, "UTF-8");
-            writer.print(xml);
-            writer.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        String xml = workload.export();
+//          xml = XMLFormatter.format(workload.export());
+//
+//            try {
+//                PrintWriter writer;
+//                writer = new PrintWriter(outputPath, "UTF-8");
+//                writer.print(xml);
+//                writer.close();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
     }
 
 }

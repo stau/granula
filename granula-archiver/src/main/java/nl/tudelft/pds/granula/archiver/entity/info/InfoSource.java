@@ -16,6 +16,8 @@
 
 package nl.tudelft.pds.granula.archiver.entity.info;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ import java.util.List;
  */
 public class InfoSource extends Source {
     List<String> infoUuids;
+    String infoUuid;
 
     public InfoSource(String name, List<Info> infos) {
         this.type = "InfoSource";
@@ -32,6 +35,12 @@ public class InfoSource extends Source {
         for (Info info : infos) {
             infoUuids.add(info.getUuid());
         }
+
+        String uuidsText = "";
+        for (String infoUuid : infoUuids) {
+            uuidsText += (uuidsText.length() == 0) ? infoUuid : ";" + infoUuid;
+        }
+        infoUuid = uuidsText;
     }
 
     public InfoSource(String name, Info info) {
@@ -39,10 +48,21 @@ public class InfoSource extends Source {
         this.name = name;
         infoUuids = new ArrayList<>();
         infoUuids.add(info.getUuid());
+
+        String uuidsText = "";
+        for (String infoUuid : infoUuids) {
+            uuidsText += (uuidsText.length() == 0) ? infoUuid : ";" + infoUuid;
+        }
+        infoUuid = uuidsText;
     }
 
     public List<String> getInfoUuids() {
         return infoUuids;
+    }
+
+    @XmlAttribute
+    public String getInfoUuid() {
+        return infoUuid;
     }
 
     @Override

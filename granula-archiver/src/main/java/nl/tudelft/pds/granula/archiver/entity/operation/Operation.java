@@ -21,15 +21,13 @@ import nl.tudelft.pds.granula.archiver.entity.environment.Environment;
 import nl.tudelft.pds.granula.archiver.source.record.Record;
 import nl.tudelft.pds.granula.archiver.source.record.RecordInfo;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Operation extends Entity {
 
     public Job job;
@@ -56,6 +54,7 @@ public class Operation extends Entity {
         this.job = job;
     }
 
+    @XmlElement(name="Actor")
     public Actor getActor() {
         return actor;
     }
@@ -64,6 +63,7 @@ public class Operation extends Entity {
         this.actor = actor;
     }
 
+    @XmlElement(name="Mission")
     public Mission getMission() {
         return mission;
     }
@@ -92,6 +92,8 @@ public class Operation extends Entity {
         children.add(operation);
     }
 
+    @XmlElements({@XmlElement(name="Operation", type=Operation.class)})
+    @XmlElementWrapper(name="Children")
     public List<Operation> getChildren() {
         return children;
     }

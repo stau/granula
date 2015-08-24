@@ -32,7 +32,7 @@ public class SummaryVisualization extends VisualizationRule {
         SummaryVisual summaryVisual = new SummaryVisual("SummaryVisual");
 
         Info summaryInfo = operation.getInfo("Summary");
-        summaryVisual.setSummarySource(new InfoSource(summaryInfo.getName(), summaryInfo));
+        summaryVisual.addSummarySources(new InfoSource(summaryInfo.getName(), summaryInfo));
         operation.addVisual(summaryVisual);
         return  true;
     }

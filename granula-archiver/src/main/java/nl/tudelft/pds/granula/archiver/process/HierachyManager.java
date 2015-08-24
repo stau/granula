@@ -47,6 +47,8 @@ public class HierachyManager {
         assembleOperations();
         fillOperations();
         linkOperations();
+
+        job.fillOperation();
     }
 
     public void initOperations() {
