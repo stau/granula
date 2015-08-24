@@ -16,6 +16,14 @@
 
 package nl.tudelft.pds.granula.archiver.log;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by wing on 30-1-15.
  */
@@ -23,6 +31,7 @@ public class WorkloadLog {
     String name;
     String tarFilePath;
     String tmpDirPath;
+    List<JobDataSource> jobDataSources;
 
     final String tmpParentDirPath = "/tmp/Granula/Log";
 
@@ -30,6 +39,17 @@ public class WorkloadLog {
         this.name = name;
         this.tarFilePath = tarFilePath;
         this.tmpDirPath = String.format("%s/%s", tmpParentDirPath, name);
+        jobDataSources = new ArrayList<>();
+
+        List<File> jobLogDirs = Arrays.asList(new File(this.tmpDirPath + "/YarnLog/").listFiles());
+
+        File utilLogDir = new File(this.tmpDirPath + "/GangliaLog/");
+
+
+        for (File jobLogDir : jobLogDirs) {
+            jobDataSources.add(new JobDataSource(jobLogDir.getAbsolutePath(), utilLogDir.getAbsolutePath()));
+        }
+
     }
 
     public String getName() {
@@ -42,5 +62,9 @@ public class WorkloadLog {
 
     public String getTmpDirPath() {
         return tmpDirPath;
+    }
+
+    public List<JobDataSource> getJobDataSources() {
+        return jobDataSources;
     }
 }

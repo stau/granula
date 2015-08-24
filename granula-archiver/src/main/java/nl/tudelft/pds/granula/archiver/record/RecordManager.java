@@ -17,9 +17,12 @@
 package nl.tudelft.pds.granula.archiver.record;
 
 import nl.tudelft.pds.granula.archiver.entity.info.TimeSeries;
+import nl.tudelft.pds.granula.archiver.entity.operation.Job;
+import nl.tudelft.pds.granula.archiver.log.JobDataSource;
 import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
 import nl.tudelft.pds.granula.modeller.fundamental.model.job.JobModel;
 import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
+import nl.tudelft.pds.granula.util.ExecutorUtil;
 import nl.tudelft.pds.granula.util.RrdManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -34,47 +37,40 @@ import java.util.List;
  */
 public class RecordManager {
 
-    protected WorkloadLog workloadLog;
-    protected JobModel jobModel;
+    protected Job job;
+    protected JobDataSource jobDataSource;
 
-    public RecordManager(WorkloadLog workloadLog, JobModel jobModel) {
-        this.workloadLog = workloadLog;
-        this.jobModel = jobModel;
+
+    public RecordManager(Job job, JobDataSource jobDataSource) {
+        this.job = job;
+        this.jobDataSource = jobDataSource;
     }
 
 
-    public List<JobRecord> extract() {
-
-        List<JobRecord> jobRecords = new ArrayList<>();
-
-        List<List<String>> jobOLFCollections = getJobOLFCollections();
-
-        for (List<String> jobOLFCollection : jobOLFCollections) {
-            jobRecords.add(extractJobRecord(jobOLFCollection));
-        }
-
-        return jobRecords;
+    public void extract() {
+        job.setJobRecord(extractJobRecord(jobDataSource));
     }
 
-    public JobRecord extractJobRecord(List<String> jobOLFCollection) {
+
+    public JobRecord extractJobRecord(JobDataSource jobDataSource) {
 
         final JobRecord jobRecord = new JobRecord();
 
-        for (String jobOLogFilePaths : jobOLFCollection) {
-            List<Record> records = extractRecordFromFile(new File(jobOLogFilePaths));
+        for (File jobLobFile : jobDataSource.getJobLogFiles()) {
+            List<Record> records = extractRecordFromFile(jobLobFile);
             jobRecord.addRecords(records);
         }
 
         jobRecord.sort();
 
-        final long startTime = Long.parseLong(jobRecord.getRecords().get(0).getAttr("Timestamp"));
-        final long endTime = Long.parseLong(jobRecord.getRecords().get(jobRecord.getRecords().size() - 1).getAttr("Timestamp"));
-
+//        final long startTime = Long.parseLong(jobRecord.getRecords().get(0).getAttr("Timestamp"));
+//        final long endTime = Long.parseLong(jobRecord.getRecords().get(jobRecord.getRecords().size() - 1).getAttr("Timestamp"));
+//
 //        ExecutorUtil executorUtil = new ExecutorUtil();
 //
-//        for (String rLogFilePath : getResourceLogFilePaths()) {
+//        for (File rLogFilePath : jobDataSource.getUtilLogFiles()) {
 //
-//            final String fRLFPath = rLogFilePath;
+//            final String fRLFPath = rLogFilePath.getAbsolutePath();
 //            executorUtil.execute(new Runnable() {
 //                @Override
 //                public void run() {
@@ -91,50 +87,14 @@ public class RecordManager {
         return jobRecord;
     }
 
-    public List<List<String>> getJobOLFCollections() {
-
-        List<List<String>> jobOLFCollections = new ArrayList<>();
-
-        List<File> jobLogDirs = Arrays.asList(new File(workloadLog.getTmpDirPath() + "/YarnLog/").listFiles());
-        for (File jobLogDir : jobLogDirs) {
-            List<String> jobOLFCollection = new ArrayList<>();
-            List<File> olfs = new ArrayList<>(
-                    FileUtils.listFilesAndDirs(jobLogDir, TrueFileFilter.TRUE, TrueFileFilter.TRUE));
-            for (File olf : olfs) {
-                if(olf.isFile()) {
-                    jobOLFCollection.add(olf.getAbsolutePath());
-                }
-            }
-            jobOLFCollections.add(jobOLFCollection);
-        }
-        return jobOLFCollections;
-    }
-
-    public List<String> getResourceLogFilePaths() {
-
-        List<String> rLogFilePaths = new ArrayList<>();
-
-        File resourceLogDir = new File(workloadLog.getTmpDirPath() + "/GangliaLog/");
-        List<File> rLogFiles = new ArrayList<>(FileUtils.listFilesAndDirs(resourceLogDir, TrueFileFilter.TRUE, TrueFileFilter.TRUE));
-
-
-        for (File rLogFile : rLogFiles) {
-            if(!rLogFile.getAbsolutePath().contains("__SummaryInfo__")) {
-                if(rLogFile.isFile()) {
-                    rLogFilePaths.add(rLogFile.getAbsolutePath());
-                }
-            }
-        }
-
-        return rLogFilePaths;
-    }
 
     public ResourceRecord extractResourceRecordFromFile(String rrdFilePath, long startTime, long endTime) {
 
         ResourceRecord resourceRecord = new ResourceRecord();
 
         RecordLocation trace = new RecordLocation();
-        trace.setLocation(rrdFilePath.replace(workloadLog.getTmpDirPath(), ""));
+//        trace.setLocation(rrdFilePath.replace(workloadLog.getTmpDirPath(), ""));
+        trace.setLocation("unknown");
         resourceRecord.setRecordLocation(trace);
 
         TimeSeries timeSeries = RrdManager.extract(rrdFilePath, startTime, endTime);
@@ -145,9 +105,8 @@ public class RecordManager {
 
 
     public List<Record> extractRecordFromFile(File file) {
-        jobModel.loadRules();
+        JobModel jobModel = (JobModel) job.getModel();
         ExtractionRule extractionRule = jobModel.getExtractionRules().get(0);
-        jobModel.unloadRules();
         return extractionRule.extractRecordFromFile(file);
     }
 

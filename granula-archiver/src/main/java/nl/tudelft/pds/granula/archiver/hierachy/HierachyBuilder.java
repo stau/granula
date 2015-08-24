@@ -38,12 +38,10 @@ public class HierachyBuilder {
     JobRecord jobRecord;
     Job job;
 
-    public HierachyBuilder(JobRecord jobRecord, JobModel jobModel) {
-        this.jobRecord = jobRecord;
+    public HierachyBuilder(Job job) {
+        this.job = job;
+        this.jobRecord = job.getJobRecord();
 
-        job = new Job();
-        job.setModel(jobModel);
-        job.setJobRecord(jobRecord);
 
         buildEnvironment();
 

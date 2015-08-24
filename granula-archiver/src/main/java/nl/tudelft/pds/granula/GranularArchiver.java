@@ -87,11 +87,13 @@ public class GranularArchiver {
     }
 
     public void assemble() {
-        recordManager = new RecordManager(workloadLog, jobModel);
-        jobRecord = recordManager.extract().get(0);
+        job = new Job();
+        job.setModel(jobModel);
 
-        hierachyBuilder = new HierachyBuilder(jobRecord, jobModel);
-        job  = hierachyBuilder.exportJob();
+        recordManager = new RecordManager(job, workloadLog.getJobDataSources().get(0));
+        recordManager.extract();
+
+        hierachyBuilder = new HierachyBuilder(job);
         archiveBuilder = new ArchiveBuilder();
         archiveBuilder.build(job);
 
