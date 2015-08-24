@@ -17,7 +17,7 @@
 package nl.tudelft.pds.granula.modeller.graphx.rule;
 
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.linking.LinkingRule;
+import nl.tudelft.pds.granula.modeller.rule.linking.LinkingRule;
 import nl.tudelft.pds.granula.modeller.graphx.GraphXType;
 
 import java.util.ArrayList;

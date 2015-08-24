@@ -19,17 +19,11 @@ package nl.tudelft.pds.granula.archiver.record;
 import nl.tudelft.pds.granula.archiver.entity.info.TimeSeries;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
 import nl.tudelft.pds.granula.archiver.log.JobDataSource;
-import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
-import nl.tudelft.pds.granula.modeller.fundamental.model.job.JobModel;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
-import nl.tudelft.pds.granula.util.ExecutorUtil;
+import nl.tudelft.pds.granula.modeller.model.job.JobModel;
+import nl.tudelft.pds.granula.modeller.rule.extraction.ExtractionRule;
 import nl.tudelft.pds.granula.util.RrdManager;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

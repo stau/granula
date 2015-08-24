@@ -2,7 +2,6 @@ package nl.tudelft.pds.granula.modeller.rule.extraction;
 
 import nl.tudelft.pds.granula.archiver.record.Record;
 import nl.tudelft.pds.granula.archiver.record.RecordLocation;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.extraction.ExtractionRule;
 
 import java.io.*;
 import java.util.ArrayList;

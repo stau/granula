@@ -19,8 +19,8 @@ package nl.tudelft.pds.granula.archiver.archive;
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.derivation.DerivationRule;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.visual.VisualizationRule;
+import nl.tudelft.pds.granula.modeller.rule.derivation.DerivationRule;
+import nl.tudelft.pds.granula.modeller.rule.visual.VisualizationRule;
 
 import java.util.*;
 

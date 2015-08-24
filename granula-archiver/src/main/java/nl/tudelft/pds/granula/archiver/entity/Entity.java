@@ -18,7 +18,7 @@ package nl.tudelft.pds.granula.archiver.entity;
 
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.visual.Visual;
-import nl.tudelft.pds.granula.modeller.fundamental.model.Model;
+import nl.tudelft.pds.granula.modeller.model.Model;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

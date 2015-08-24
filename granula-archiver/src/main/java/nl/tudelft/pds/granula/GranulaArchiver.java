@@ -24,7 +24,8 @@ import nl.tudelft.pds.granula.archiver.log.LogManager;
 import nl.tudelft.pds.granula.archiver.log.WorkloadLog;
 import nl.tudelft.pds.granula.archiver.record.JobRecord;
 import nl.tudelft.pds.granula.archiver.record.RecordManager;
-import nl.tudelft.pds.granula.modeller.fundamental.model.job.JobModel;
+import nl.tudelft.pds.granula.modeller.model.job.JobModel;
+import nl.tudelft.pds.granula.util.ProgressUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;

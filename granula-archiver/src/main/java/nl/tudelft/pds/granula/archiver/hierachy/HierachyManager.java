@@ -21,30 +21,23 @@ import nl.tudelft.pds.granula.archiver.entity.operation.Actor;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
 import nl.tudelft.pds.granula.archiver.entity.operation.Mission;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
-import nl.tudelft.pds.granula.archiver.record.JobRecord;
 import nl.tudelft.pds.granula.archiver.record.Record;
 import nl.tudelft.pds.granula.archiver.record.RecordInfo;
-import nl.tudelft.pds.granula.modeller.fundamental.model.job.JobModel;
-import nl.tudelft.pds.granula.modeller.fundamental.model.operation.OperationModel;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.assembling.AssemblingRule;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.filling.FillingRule;
-import nl.tudelft.pds.granula.modeller.fundamental.rule.linking.LinkingRule;
+import nl.tudelft.pds.granula.modeller.model.job.JobModel;
+import nl.tudelft.pds.granula.modeller.model.operation.OperationModel;
+import nl.tudelft.pds.granula.modeller.rule.assembling.AssemblingRule;
+import nl.tudelft.pds.granula.modeller.rule.filling.FillingRule;
+import nl.tudelft.pds.granula.modeller.rule.linking.LinkingRule;
 import nl.tudelft.pds.granula.util.UuidGenerator;
 
 import java.util.*;
 
 public class HierachyManager {
 
-    JobRecord jobRecord;
     Job job;
 
     public HierachyManager(Job job) {
         this.job = job;
-        this.jobRecord = job.getJobRecord();
-
-
-
-
     }
 
     public void build() {
@@ -105,7 +98,7 @@ public class HierachyManager {
 
     public void initOperations() {
 
-        for (Record record : jobRecord.getRecords()) {
+        for (Record record : job.getJobRecord().getRecords()) {
             if(record.isOf(RecordInfo.InfoName, "StartTime")) {
                 Operation operation = new Operation();
                 operation.setUuid(UuidGenerator.getRandomUUID());
@@ -261,10 +254,6 @@ public class HierachyManager {
             uniqueSubActor.setParent(operations.get(0).getActor());
             linkActor(uniqueSubActor);
         }
-    }
-
-    public Job exportJob() {
-        return job;
     }
 
 }
