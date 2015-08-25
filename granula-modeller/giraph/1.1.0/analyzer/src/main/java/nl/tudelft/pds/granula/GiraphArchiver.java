@@ -13,11 +13,16 @@ public class GiraphArchiver {
     public static void main(String[] args) {
 
 
-        String repoPath = "/home/wlngai/Workstation/Dropbox/Repo/granula";
+        String repoPath = "/home/wing/Workstation/Dropbox/Repo/granula";
 
         String workloadDirPath = repoPath + "/data/input/";
         File workloadDir = new File(workloadDirPath);
         File[] workloadFiles = workloadDir.listFiles();
+
+        if(workloadFiles == null || workloadFiles.length < 1) {
+            throw new IllegalStateException("No data source found.");
+        }
+
         Arrays.sort(workloadFiles);
         File workloadFile =workloadFiles[workloadFiles.length - 1];
         workloadFile = new File(repoPath + "/data/input/giraph.tar.gz");
