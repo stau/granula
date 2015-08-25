@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
@@ -34,7 +35,7 @@ public class ColorDerivation extends DerivationRule {
     @Override
     public boolean execute() {
         Operation operation = (Operation) entity;
-        Info info = new Info("Color");
+        BasicInfo info = new BasicInfo("Color");
         info.addInfo(color, new ArrayList<Source>());
         operation.addInfo(info);
         return  true;

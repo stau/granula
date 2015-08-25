@@ -211,7 +211,7 @@ public class BspMasterBspIteration extends ConcreteOperationModel {
 //            }
 
 
-            Info superstepNumInfo = new Info("NumSuperstep");
+            BasicInfo superstepNumInfo = new BasicInfo("NumSuperstep");
             superstepNumInfo.setDescription("The [NumSuperstep] is the total number of all actual supersteps (non-dataloading).");
             superstepNumInfo.addInfo(String.valueOf(superstepNum), superstepNumSources);
             operation.addInfo(superstepNumInfo);

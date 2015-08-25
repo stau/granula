@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation.time;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.RecordSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -42,7 +43,7 @@ public class StartTimeDerivation extends DerivationRule {
         List<Source> sources = new ArrayList<>();
         sources.add(new RecordSource("StartTime", startEventRecord));
 
-        Info info = new Info("StartTime");
+        BasicInfo info = new BasicInfo("StartTime");
         info.setDescription("The [StartTime] of an operation is retrieved from the [StartTime] record in the log.");
         info.addInfo(String.valueOf(startime), sources);
         operation.addInfo(info);

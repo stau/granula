@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.RecordSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -38,7 +39,7 @@ public class UnusedRecordInfoDerivation extends DerivationRule {
         for (Record record : operation.getRecords()) {
             String infoName = record.getAttr(RecordInfo.InfoName);
             if(!operation.hasInfo(infoName)) {
-                Info info = new Info(infoName);
+                BasicInfo info = new BasicInfo(infoName);
                 List<Source> sources = new ArrayList<>();
                 sources.add(new RecordSource(infoName, record));
                 info.addInfo(record.getAttr(RecordInfo.InfoValue), sources);

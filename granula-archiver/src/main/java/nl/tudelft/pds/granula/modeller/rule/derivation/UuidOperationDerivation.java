@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
@@ -32,7 +33,7 @@ public class UuidOperationDerivation extends DerivationRule {
     public boolean execute() {
         Operation operation = (Operation) entity;
         long uuid = Long.parseLong(operation.getUuid());
-        Info info = new Info("Uuid");
+        BasicInfo info = new BasicInfo("Uuid");
         info.addInfo(String.valueOf(uuid), new ArrayList<Source>());
         operation.addInfo(info);
         return  true;

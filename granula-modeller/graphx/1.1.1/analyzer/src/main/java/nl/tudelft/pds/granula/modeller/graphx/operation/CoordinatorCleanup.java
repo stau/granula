@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.graphx.operation;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 import nl.tudelft.pds.granula.archiver.entity.info.SummaryInfo;
@@ -96,7 +97,7 @@ public class CoordinatorCleanup extends AbstractOperationModel {
             }
 
 
-            Info ioTime = new Info("DataOffloadTime");
+            BasicInfo ioTime = new BasicInfo("DataOffloadTime");
             ioTime.addInfo(String.valueOf(duration), new ArrayList<Source>());
 
             operation.addInfo(ioTime);

@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation.time;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -42,7 +43,7 @@ public class FilialStartTimeDerivation extends DerivationRule {
             startTime = Math.min(startTime, Long.parseLong(startTimeInfo.getValue()));
             usedInfos.add(startTimeInfo);
         }
-        Info info = new Info("StartTime");
+        BasicInfo info = new BasicInfo("StartTime");
         List<Source> sources = new ArrayList<>();
         sources.add(new InfoSource("FilialEndTimes", usedInfos));
         info.setDescription("The [StartTime] of an (abstract) operation is derived from the smallest value of [FilialStartTimes], which are [StartTime]s of all child operations.");

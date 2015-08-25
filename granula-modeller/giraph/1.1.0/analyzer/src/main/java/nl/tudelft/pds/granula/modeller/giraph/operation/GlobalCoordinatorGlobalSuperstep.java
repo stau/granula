@@ -16,10 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.giraph.operation;
 
-import nl.tudelft.pds.granula.archiver.entity.info.Info;
-import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
-import nl.tudelft.pds.granula.archiver.entity.info.Source;
-import nl.tudelft.pds.granula.archiver.entity.info.SummaryInfo;
+import nl.tudelft.pds.granula.archiver.entity.info.*;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
 import nl.tudelft.pds.granula.modeller.rule.derivation.*;
 import nl.tudelft.pds.granula.modeller.rule.derivation.time.FilialEndTimeDerivation;
@@ -106,7 +103,7 @@ public class GlobalCoordinatorGlobalSuperstep extends ConcreteOperationModel {
             List<Source> sources = new ArrayList<>();
             sources.add(new InfoSource("ComputationDuration", computationDurationInfos));
 
-            Info syncOverheadInfo = new Info("SyncOverhead");
+            BasicInfo syncOverheadInfo = new BasicInfo("SyncOverhead");
 
             long max = Long.MIN_VALUE;
             long total = 0;

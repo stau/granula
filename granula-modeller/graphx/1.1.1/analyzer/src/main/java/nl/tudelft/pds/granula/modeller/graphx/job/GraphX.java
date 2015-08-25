@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.graphx.job;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
@@ -107,7 +108,7 @@ public class GraphX extends JobModel {
                         executorSize.getValue(), executorMemory.getValue());
 
 
-                Info jobNameInfo = new Info("JobName");
+            BasicInfo jobNameInfo = new BasicInfo("JobName");
                 jobNameInfo.addInfo(jobName, new ArrayList<Source>());
                 job.addInfo(jobNameInfo);
                 return  true;

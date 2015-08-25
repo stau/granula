@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation.time;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -39,7 +40,7 @@ public class ParentalEndTimeDerivation extends DerivationRule {
         Info sourceInfo = parent.getInfo("EndTime");
         long endTime = Long.parseLong(sourceInfo.getValue());
 
-        Info info = new Info("EndTime");
+        BasicInfo info = new BasicInfo("EndTime");
         List<Source> sources = new ArrayList<>();
         sources.add(new InfoSource("ParentalEndTime", sourceInfo));
         info.setDescription("The [EndTime] of an (abstract) operation is derived from the largest value of [FilialEndTimes], which are [EndTime]s of all child operations.");

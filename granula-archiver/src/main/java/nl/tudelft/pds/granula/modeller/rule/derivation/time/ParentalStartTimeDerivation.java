@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation.time;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -39,7 +40,7 @@ public class ParentalStartTimeDerivation extends DerivationRule {
         Info sourceInfo = parent.getInfo("StartTime");
         long endTime = Long.parseLong(sourceInfo.getValue());
 
-        Info info = new Info("StartTime");
+        BasicInfo info = new BasicInfo("StartTime");
         List<Source> sources = new ArrayList<>();
         sources.add(new InfoSource("ParentalStartTime", sourceInfo));
         info.setDescription("The [StartTime] of an (abstract) operation is derived from the [StartTime] of the parent.");

@@ -16,10 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.giraph.operation;
 
-import nl.tudelft.pds.granula.archiver.entity.info.Info;
-import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
-import nl.tudelft.pds.granula.archiver.entity.info.Source;
-import nl.tudelft.pds.granula.archiver.entity.info.SummaryInfo;
+import nl.tudelft.pds.granula.archiver.entity.info.*;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
 import nl.tudelft.pds.granula.modeller.model.operation.ConcreteOperationModel;
 import nl.tudelft.pds.granula.modeller.rule.derivation.BasicSummaryDerivation;
@@ -108,7 +105,7 @@ public class BspWorkerPostSuperstep extends ConcreteOperationModel {
 
             long localMsgVol = Long.parseLong(sentMsgVolInfo.getValue()) - Long.parseLong(remoteMsgVolInfo.getValue());
 
-            Info localMsgInfo = new Info("LocalMsgVolume");
+            BasicInfo localMsgInfo = new BasicInfo("LocalMsgVolume");
             localMsgInfo.setDescription(String.format("[%s] is derived from [%s] - [%s]", "LocalMsgVolume", "SentMsgVolume", "RemoteMsgVolume"));
             localMsgInfo.addInfo(String.valueOf(localMsgVol), sources);
             operation.addInfo(localMsgInfo);

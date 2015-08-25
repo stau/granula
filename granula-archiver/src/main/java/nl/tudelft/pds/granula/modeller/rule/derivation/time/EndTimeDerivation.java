@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation.time;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.RecordSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -41,7 +42,7 @@ public class EndTimeDerivation extends DerivationRule {
         List<Source> sources = new ArrayList<>();
         sources.add(new RecordSource("EndTime", endEventRecord));
 
-        Info info = new Info("EndTime");
+        BasicInfo info = new BasicInfo("EndTime");
         info.setDescription("The [EndTime] of an operation is retrieved from the [EndTime] record in the log.");
         info.addInfo(String.valueOf(endtime), sources);
         operation.addInfo(info);

@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.giraph.job;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
@@ -123,7 +124,7 @@ public class Giraph extends JobModel {
                         computeClass.getValue().replace("Computation", ""), fileName,
                         numContainers.getValue(), containerHeapSize.getValue());
 
-                Info jobNameInfo = new Info("JobName");
+            BasicInfo jobNameInfo = new BasicInfo("JobName");
                 jobNameInfo.addInfo(jobName, new ArrayList<Source>());
                 job.addInfo(jobNameInfo);
                 return  true;

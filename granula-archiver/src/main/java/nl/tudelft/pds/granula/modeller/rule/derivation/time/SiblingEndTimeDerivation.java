@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation.time;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -61,7 +62,7 @@ public class SiblingEndTimeDerivation extends DerivationRule {
         List<Source> sources = new ArrayList<>();
         sources.add(new InfoSource("StartTime", firstSibling.getInfo("StartTime")));
 
-        Info info = new Info("EndTime");
+        BasicInfo info = new BasicInfo("EndTime");
         info.setDescription("The [EndTime] of an operation is retrieved from the [StartTime] of the first Subling.");
         info.addInfo(String.valueOf(endTime), sources);
         operation.addInfo(info);

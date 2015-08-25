@@ -16,7 +16,6 @@
 
 package nl.tudelft.pds.granula.archiver.entity.info;
 
-import nl.tudelft.pds.granula.ArchiverConfiguration;
 import nl.tudelft.pds.granula.archiver.entity.Attribute;
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 
@@ -24,50 +23,25 @@ import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlRootElement(name="Info")
-@XmlSeeAlso({BasicInfo.class, SummaryInfo.class, TimeSeriesInfo.class})
-public abstract class Info extends Attribute {
-    String value;
-    String description;
+public class BasicInfo extends Info {
 
-    private Info() {
+    private BasicInfo() {
         this("unspecified");
     }
 
-    public Info(String name) {
+    public BasicInfo(String name) {
         this(name, Identifier.BasicInfo);
     }
 
-    public Info(String name, String type) {
+    public BasicInfo(String name, String type) {
         super(name, type);
         this.description = "It is not certain how this information is derived.";
     }
 
-    @XmlAttribute
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
+    public void addInfo(String value, List<Source> sources) {
         this.value = value;
+        for (Source source : sources) {
+            addSource(source);
+        }
     }
-
-    @XmlElementWrapper(name="Sources")
-    @XmlElementRef
-    public List<Source> getSources() {
-        return sources;
-    }
-
-    public void addSource(Source source) {
-        sources.add(source);
-    }
-
-    @XmlElement(name="Description")
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 }

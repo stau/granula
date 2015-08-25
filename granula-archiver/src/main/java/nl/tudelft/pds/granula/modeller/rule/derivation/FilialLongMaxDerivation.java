@@ -16,6 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.rule.derivation;
 
+import nl.tudelft.pds.granula.archiver.entity.info.BasicInfo;
 import nl.tudelft.pds.granula.archiver.entity.info.Info;
 import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
@@ -52,7 +53,7 @@ public class FilialLongMaxDerivation extends DerivationRule {
             }
         }
         sources.add(new InfoSource(infoName, usedInfos));
-        Info aggInfo = new Info(aggInfoName);
+        BasicInfo aggInfo = new BasicInfo(aggInfoName);
 
         long value = max;
         aggInfo.setDescription(String.format("[%s] is maximum of [%s]s of all children operation with mission type %s. ", aggInfoName, infoName, missionType));
