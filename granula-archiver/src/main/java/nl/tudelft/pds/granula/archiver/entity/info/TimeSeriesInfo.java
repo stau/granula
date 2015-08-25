@@ -19,16 +19,21 @@ package nl.tudelft.pds.granula.archiver.entity.info;
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
  * Created by wing on 26-2-15.
  */
+@XmlRootElement(name="Info")
 public class TimeSeriesInfo extends Info {
 
     TimeSeries timeSeries;
     String metricUnit;
 
+    public TimeSeriesInfo() {
+        this("unspecified");
+    }
 
     public TimeSeriesInfo(String name) {
         super(name, Identifier.TimeSeriesInfo);

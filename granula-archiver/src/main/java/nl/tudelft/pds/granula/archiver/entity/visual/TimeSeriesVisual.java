@@ -20,15 +20,15 @@ import nl.tudelft.pds.granula.archiver.entity.Archivable;
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 import nl.tudelft.pds.granula.archiver.entity.info.*;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wing on 16-3-15.
  */
+@XmlRootElement(name="Visual")
+@XmlSeeAlso({Source.class})
 public class TimeSeriesVisual extends Visual {
 
     String title;
@@ -36,12 +36,15 @@ public class TimeSeriesVisual extends Visual {
     Axis y1Axis;
     Axis y2Axis;
 
+    private TimeSeriesVisual() {
+        super("unspecified", Identifier.TimeSeriesVisual);
+    }
+
+
     public TimeSeriesVisual(String name) {
         super(name, Identifier.TimeSeriesVisual);
         title = "Unspecified Title";
     }
-
-
 
     public String export() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -133,6 +136,7 @@ public class TimeSeriesVisual extends Visual {
         this.y2Axis.addTimeSeriesInfo(timeSeriesInfo);
     }
 
+    @XmlRootElement(name="Axis")
     private static class Axis extends Archivable {
 
         String title;
@@ -141,6 +145,14 @@ public class TimeSeriesVisual extends Visual {
         String endValue;
         boolean isDynamic;
         List<Source> tsSources;
+
+        private Axis() {
+            this.type = "unspecified";
+            this.title = "unspecified";
+            this.unit = "unspecified";
+            isDynamic = true;
+            tsSources = new ArrayList<>();
+        }
 
         public Axis(String type, String title, String unit) {
             this.type = type;
@@ -180,11 +192,8 @@ public class TimeSeriesVisual extends Visual {
             return endValue;
         }
 
-        @XmlElements({
-                @XmlElement(name="Source", type=InfoSource.class),
-                @XmlElement(name="Source", type=RecordSource.class)
-        })
         @XmlElementWrapper(name="TimeSeriesSources")
+        @XmlElementRef
         public List<Source> getTsSources() {
             return tsSources;
         }

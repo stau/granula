@@ -20,15 +20,18 @@ import nl.tudelft.pds.granula.ArchiverConfiguration;
 import nl.tudelft.pds.granula.archiver.entity.Attribute;
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
+@XmlRootElement(name="Info")
+@XmlSeeAlso({SummaryInfo.class, TimeSeriesInfo.class})
 public class Info extends Attribute {
     String value;
     String description;
+
+    public Info() {
+        this("unspecified");
+    }
 
     public Info(String name) {
         this(name, Identifier.BasicInfo);
@@ -80,11 +83,8 @@ public class Info extends Attribute {
         this.value = value;
     }
 
-    @XmlElements({
-            @XmlElement(name="Source", type=InfoSource.class),
-            @XmlElement(name="Source", type=RecordSource.class)
-    })
     @XmlElementWrapper(name="Sources")
+    @XmlElementRef
     public List<Source> getSources() {
         return sources;
     }

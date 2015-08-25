@@ -21,21 +21,26 @@ import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
 import nl.tudelft.pds.granula.archiver.entity.info.RecordSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
+import javax.swing.text.TableView;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wing on 16-3-15.
  */
+@XmlRootElement(name="Visual")
+@XmlSeeAlso({Source.class})
 public class TableVisual extends Visual {
 
     String commonDescription;
     String specficDescription;
 
     List<TableCell> tblCells;
+
+    private TableVisual() {
+        super("unspecified", Identifier.TableVisual);
+    }
 
     public TableVisual(String name) {
         super(name, Identifier.TableVisual);
@@ -60,9 +65,7 @@ public class TableVisual extends Visual {
         return stringBuilder.toString();
     }
 
-    @XmlElements({
-            @XmlElement(name="TableCell", type=TableCell.class)
-    })
+    @XmlElementRef
     public List<TableCell> getTblCells() {
         return tblCells;
     }
@@ -71,6 +74,7 @@ public class TableVisual extends Visual {
         return String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid);
     }
 
+    @XmlRootElement(name="TableCell")
     private static class TableCell {
          Source source;
 
@@ -78,10 +82,9 @@ public class TableVisual extends Visual {
             this.source = source;
         }
 
-        @XmlElements({
-                @XmlElement(name="Source", type=InfoSource.class),
-                @XmlElement(name="Source", type=RecordSource.class)
-        })
+        private TableCell() {}
+
+        @XmlElementRef
         public Source getSource() {
             return source;
         }

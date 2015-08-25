@@ -18,9 +18,12 @@ package nl.tudelft.pds.granula.archiver.entity.visual;
 
 import nl.tudelft.pds.granula.archiver.entity.Attribute;
 
+import javax.xml.bind.annotation.XmlSeeAlso;
+
 /**
  * Created by wing on 5-2-15.
  */
+@XmlSeeAlso({TableVisual.class, SummaryVisual.class, TimeSeriesVisual.class})
 public abstract class Visual extends Attribute {
 
     public Visual(String name, String type) {

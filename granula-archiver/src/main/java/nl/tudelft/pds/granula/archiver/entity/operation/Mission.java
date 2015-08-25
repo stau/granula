@@ -19,9 +19,11 @@ package nl.tudelft.pds.granula.archiver.entity.operation;
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement(name="Mission")
 public class Mission extends Entity {
 
     String id;
@@ -35,6 +37,12 @@ public class Mission extends Entity {
         this.type = type;
         this.id = id;
         this.name = (id.startsWith("Id.")) ? type : type + '-' + id;
+        children = new ArrayList<>();
+        operations = new ArrayList<>();
+    }
+
+    public Mission() {
+        super();
         children = new ArrayList<>();
         operations = new ArrayList<>();
     }

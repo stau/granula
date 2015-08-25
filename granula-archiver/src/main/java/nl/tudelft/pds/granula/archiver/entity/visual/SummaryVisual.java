@@ -21,18 +21,22 @@ import nl.tudelft.pds.granula.archiver.entity.info.InfoSource;
 import nl.tudelft.pds.granula.archiver.entity.info.RecordSource;
 import nl.tudelft.pds.granula.archiver.entity.info.Source;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wing on 16-3-15.
  */
+@XmlRootElement(name="Visual")
+@XmlSeeAlso({Source.class})
 public class SummaryVisual extends Visual {
 
     List<Source> summarySources;
+
+    private SummaryVisual() {
+        super("unspecified", Identifier.SummaryVisual);
+    }
 
     public SummaryVisual(String name) {
         super(name, Identifier.SummaryVisual);
@@ -59,11 +63,8 @@ public class SummaryVisual extends Visual {
         return stringBuilder.toString();
     }
 
-    @XmlElements({
-            @XmlElement(name="Source", type=InfoSource.class),
-            @XmlElement(name="Source", type=RecordSource.class)
-    })
     @XmlElementWrapper(name="SummarySource")
+    @XmlElementRef
     public List<Source> getSummarySources() {
         return summarySources;
     }
@@ -77,12 +78,4 @@ public class SummaryVisual extends Visual {
         summarySources.add(summarySource);
     }
 
-    @XmlElements({
-            @XmlElement(name="Source", type=InfoSource.class),
-            @XmlElement(name="Source", type=RecordSource.class)
-    })
-    @XmlElementWrapper(name="Sources")
-    public List<Source> getSources() {
-        return sources;
-    }
 }

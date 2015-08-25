@@ -37,6 +37,7 @@ import java.util.Map;
  * Created by wing on 5-2-15.
  */
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlSeeAlso({Info.class, Visual.class})
 public abstract class Entity extends Archivable {
 
     protected Map<String, Info> infos;
@@ -53,13 +54,8 @@ public abstract class Entity extends Archivable {
         infos.put(info.getName(), info);
     }
 
-
-    @XmlElements({
-            @XmlElement(name="Info", type=Info.class),
-            @XmlElement(name="Info", type=SummaryInfo.class),
-            @XmlElement(name="Info", type=TimeSeriesInfo.class),
-    })
     @XmlElementWrapper(name="Infos")
+    @XmlElementRef
     public List<Info> getInfos() {
         return new ArrayList<>(infos.values());
     }
@@ -81,12 +77,8 @@ public abstract class Entity extends Archivable {
         visuals.put(visual.getName(), visual);
     }
 
-    @XmlElements({
-            @XmlElement(name="Visual", type=SummaryVisual.class),
-            @XmlElement(name="Visual", type=TableVisual.class),
-            @XmlElement(name="Visual", type=TimeSeriesVisual.class),
-    })
     @XmlElementWrapper(name="Visuals")
+    @XmlElementRef
     public List<Visual> getVisuals() { return new ArrayList<>(visuals.values()); }
 
     public Model getModel() {

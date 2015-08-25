@@ -26,6 +26,7 @@ import java.util.List;
  * Created by wing on 12-3-15.
  */
 @XmlRootElement(name="Workload")
+@XmlSeeAlso({Job.class})
 public class Workload extends Entity {
 
 
@@ -40,7 +41,7 @@ public class Workload extends Entity {
         this.jobs.add(job);
     }
 
-    @XmlElements({@XmlElement(name="Job", type=Job.class)})
+    @XmlElementRef
     public List<Job> getJobs() {
         return jobs;
     }

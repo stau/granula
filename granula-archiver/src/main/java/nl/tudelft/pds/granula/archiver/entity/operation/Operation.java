@@ -27,7 +27,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@XmlRootElement(name="Operation")
+@XmlSeeAlso({Actor.class, Mission.class})
 public class Operation extends Entity {
 
     public Job job;
@@ -54,7 +55,7 @@ public class Operation extends Entity {
         this.job = job;
     }
 
-    @XmlElement(name="Actor")
+    @XmlElementRef
     public Actor getActor() {
         return actor;
     }
@@ -63,7 +64,7 @@ public class Operation extends Entity {
         this.actor = actor;
     }
 
-    @XmlElement(name="Mission")
+    @XmlElementRef
     public Mission getMission() {
         return mission;
     }
@@ -92,8 +93,8 @@ public class Operation extends Entity {
         children.add(operation);
     }
 
-    @XmlElements({@XmlElement(name="Operation", type=Operation.class)})
     @XmlElementWrapper(name="Children")
+    @XmlElementRef
     public List<Operation> getChildren() {
         return children;
     }

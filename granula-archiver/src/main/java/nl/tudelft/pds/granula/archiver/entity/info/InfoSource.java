@@ -18,15 +18,23 @@ package nl.tudelft.pds.granula.archiver.entity.info;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wing on 26-2-15.
  */
+@XmlRootElement(name="Source")
 public class InfoSource extends Source {
     List<String> infoUuids;
     String infoUuid;
+
+    public InfoSource() {
+        this.name = "unspecified";
+        this.type = "InfoSource";
+        infoUuids = new ArrayList<>();
+    }
 
     public InfoSource(String name, List<Info> infos) {
         this.type = "InfoSource";
