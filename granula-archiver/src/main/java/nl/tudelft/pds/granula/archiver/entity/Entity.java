@@ -94,32 +94,6 @@ public abstract class Entity extends Archivable {
     public void loadRules() {
         model.loadRules();
     }
-
-    protected String exportInfos() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("<Infos>");
-        for (Info info : getInfos()) {
-            stringBuilder.append(info.export());
-        }
-        stringBuilder.append("</Infos>");
-
-        return stringBuilder.toString();
-    }
-
-    protected String exportVisuals() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("<Visuals>");
-        for (Visual visual : getVisuals()) {
-            stringBuilder.append(visual.export());
-        }
-        stringBuilder.append("</Visuals>");
-
-        return stringBuilder.toString();
-    }
-
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + ' ' +getName();

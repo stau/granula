@@ -50,30 +50,6 @@ public class Info extends Attribute {
 
     }
 
-    public String exportBasic() {
-        return String.format("<Info name=\"%s\" value=\"%s\" type=\"%s\" uuid=\"%s\"/>", name, value, type, uuid);
-    }
-
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Info name=\"%s\" value=\"%s\" type=\"%s\" uuid=\"%s\">", name, value, type, uuid));
-
-        if(ArchiverConfiguration.ExportDescription) {
-            stringBuilder.append(String.format("<Description>%s</Description>", description));
-        } else {
-            stringBuilder.append(String.format("<Description>%s</Description>", ""));
-        }
-
-
-        stringBuilder.append("<Sources>");
-        for (Source source : sources) {
-            stringBuilder.append(source.export());
-        }
-        stringBuilder.append("</Sources>");
-        stringBuilder.append("</Info>");
-        return stringBuilder.toString();
-    }
-
     @XmlAttribute
     public String getValue() {
         return value;

@@ -51,27 +51,10 @@ public class TableVisual extends Visual {
         tblCells.add(new TableCell(source));
     }
 
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid));
-
-        stringBuilder.append("<TableCell>");
-        for (TableCell tblCell : tblCells) {
-            stringBuilder.append(tblCell.getSource().export());
-        }
-        stringBuilder.append("</TableCell>");
-
-        stringBuilder.append("</Visual>");
-        return stringBuilder.toString();
-    }
 
     @XmlElementRef
     public List<TableCell> getTblCells() {
         return tblCells;
-    }
-
-    public String exportBasic() {
-        return String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid);
     }
 
     @XmlRootElement(name="TableCell")

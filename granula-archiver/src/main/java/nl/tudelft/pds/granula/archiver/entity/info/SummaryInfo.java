@@ -50,26 +50,4 @@ public class SummaryInfo extends Info {
         return summary;
     }
 
-    public String exportBasic() {
-        return String.format("<Info name=\"%s\" value=\"%s\" type=\"%s\" uuid=\"%s\">", name, value, type, uuid);
-
-    }
-
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Info name=\"%s\" value=\"%s\" type=\"%s\" uuid=\"%s\">", name, value, type, uuid));
-
-        stringBuilder.append(String.format("<Description>%s</Description>", description));
-
-        stringBuilder.append("<Sources>");
-        for (Source source : sources) {
-            stringBuilder.append(source.export());
-        }
-        stringBuilder.append("</Sources>");
-
-        stringBuilder.append(String.format("<Summary>%s</Summary>", summary));
-
-        stringBuilder.append("</Info>");
-        return stringBuilder.toString();
-    }
 }

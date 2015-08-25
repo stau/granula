@@ -46,36 +46,6 @@ public class TimeSeriesVisual extends Visual {
         title = "Unspecified Title";
     }
 
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid));
-
-        stringBuilder.append(String.format("<Title>%s</Title>", title));
-
-        if((y1Axis == null && y2Axis == null) || xAxis == null) {
-            System.out.println("One of the axes are not initialized.");
-            throw new IllegalStateException();
-        }
-        stringBuilder.append(xAxis.export());
-        stringBuilder.append(y1Axis.export());
-        if(y2Axis != null) {
-            stringBuilder.append(y2Axis.export());
-        }
-
-        stringBuilder.append("<Sources>");
-        for (Source source : sources) {
-            stringBuilder.append(source.export());
-        }
-        stringBuilder.append("</Sources>");
-
-        stringBuilder.append("</Visual>");
-        return stringBuilder.toString();
-    }
-
-    public String exportBasic() {
-        return String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\" />", type, name, uuid);
-    }
-
     @XmlElement(name="Title")
     public String getTitle() {
         return title;
@@ -202,31 +172,6 @@ public class TimeSeriesVisual extends Visual {
             List<Info> sourceInfos = new ArrayList<>();
             sourceInfos.add(timeSeriesInfo);
             this.tsSources.add(new InfoSource("TimeSeries Info", timeSeriesInfo));
-        }
-
-        @Override
-        public String export() {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(String.format("<Axis type=\"%s\" >", type));
-
-            stringBuilder.append(String.format("<Title>%s</Title>", title));
-            stringBuilder.append(String.format("<Unit>%s</Unit>", unit));
-            stringBuilder.append(String.format("<StartValue>%s</StartValue>", startValue));
-            stringBuilder.append(String.format("<EndValue>%s</EndValue>", endValue));
-
-            stringBuilder.append("<TimeSeriesSources>");
-            for (Source tsSource : tsSources) {
-                stringBuilder.append(tsSource.export());
-            }
-            stringBuilder.append("</TimeSeriesSources>");
-
-            stringBuilder.append("</Axis>");
-            return stringBuilder.toString();
-        }
-
-        @Override
-        public String exportBasic() {
-            return String.format("<Axis type=\"%s\" />", type);
         }
     }
 }

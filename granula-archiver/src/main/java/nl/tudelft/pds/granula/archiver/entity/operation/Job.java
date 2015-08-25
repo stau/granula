@@ -126,34 +126,4 @@ public class Job extends Entity {
         this.environment = environment;
     }
 
-    public String exportBasic() {
-        return String.format("<Job uuid=\"%s\"></Job>", uuid);
-    }
-
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Job uuid=\"%s\">", uuid));
-
-        stringBuilder.append("<Operations>");
-        stringBuilder.append(topOperation.export());
-        stringBuilder.append("</Operations>");
-
-        stringBuilder.append("<Actors>");
-        stringBuilder.append(topActor.export());
-        stringBuilder.append("</Actors>");
-
-        stringBuilder.append("<Missions>");
-        stringBuilder.append(topMission.export());
-        stringBuilder.append("</Missions>");
-
-//        stringBuilder.append(environment.export());
-
-        stringBuilder.append(exportInfos());
-        stringBuilder.append(exportVisuals());
-
-
-        stringBuilder.append("</Job>");
-        return stringBuilder.toString();
-    }
-
 }

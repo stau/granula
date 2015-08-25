@@ -46,23 +46,5 @@ public class Workload extends Entity {
         return jobs;
     }
 
-    public String exportBasic() {
-        return String.format("<Workload uuid=\"%s\"></Workload>", uuid);
-    }
-
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Workload uuid=\"%s\">", uuid));
-
-        for (Job job : jobs) {
-            stringBuilder.append(job.export());
-        }
-
-        stringBuilder.append(exportInfos());
-        stringBuilder.append(exportVisuals());
-
-        stringBuilder.append("</Workload>");
-        return stringBuilder.toString();
-    }
 
 }

@@ -43,34 +43,11 @@ public class SummaryVisual extends Visual {
         summarySources = new ArrayList<>();
     }
 
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid));
-
-        stringBuilder.append("<SummarySource>");
-        for (Source summarySource : summarySources) {
-            stringBuilder.append(summarySource.export());
-        }
-        stringBuilder.append("</SummarySource>");
-
-        stringBuilder.append("<Sources>");
-        for (Source source : sources) {
-            stringBuilder.append(source.export());
-        }
-        stringBuilder.append("</Sources>");
-
-        stringBuilder.append("</Visual>");
-        return stringBuilder.toString();
-    }
 
     @XmlElementWrapper(name="SummarySource")
     @XmlElementRef
     public List<Source> getSummarySources() {
         return summarySources;
-    }
-
-    public String exportBasic() {
-        return String.format("<Visual type=\"%s\" name=\"%s\" uuid=\"%s\">", type, name, uuid);
     }
 
     public void addSummarySources(Source summarySource) {

@@ -72,24 +72,5 @@ public class TimeSeriesInfo extends Info {
         this.metricUnit = metricUnit;
     }
 
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Info name=\"%s\" value=\"%s\" type=\"%s\" uuid=\"%s\">", name, value, type, uuid));
 
-        stringBuilder.append(String.format("<Description>%s</Description>", description));
-
-        stringBuilder.append("<Sources>");
-        for (Source source : sources) {
-            source.export();
-        }
-        stringBuilder.append("</Sources>");
-
-        stringBuilder.append(String.format("<MetricUnit>%s</MetricUnit>", metricUnit));
-        for (Datapoint datapoint : timeSeries.getDatapoints()) {
-            stringBuilder.append(String.format("<Data t=\"%s\" v=\"%f\" />", datapoint.getTimestamp(), datapoint.getValue()));
-        }
-
-        stringBuilder.append("</Info>");
-        return stringBuilder.toString();
-    }
 }

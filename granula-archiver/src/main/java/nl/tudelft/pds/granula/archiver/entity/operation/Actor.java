@@ -48,34 +48,6 @@ public class Actor extends Entity {
     }
 
 
-    public String exportBasic() {
-        return String.format("<Actor name=\"%s\" type=\"%s\" id=\"%s\" uuid=\"%s\" />", name, type, id, uuid);
-    }
-
-    public String export() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("<Actor name=\"%s\" type=\"%s\" id=\"%s\" uuid=\"%s\">", name, type, id, uuid));
-
-        stringBuilder.append(exportInfos());
-        stringBuilder.append(exportVisuals());
-
-        stringBuilder.append("<Operations>");
-        for (Operation operation : getOperations()) {
-            stringBuilder.append(operation.exportBasic());
-        }
-        stringBuilder.append("</Operations>");
-
-        stringBuilder.append("<Children>");
-        for (Actor child : children) {
-            stringBuilder.append(child.export());
-        }
-        stringBuilder.append("</Children>");
-
-
-        stringBuilder.append("</Actor>");
-        return stringBuilder.toString();
-    }
-
     public List<Operation> getOperations() {
         return operations;
     }

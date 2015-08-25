@@ -60,8 +60,4 @@ public abstract class Archivable {
         this.type = type;
     }
 
-    public abstract String export();
-
-    public abstract String exportBasic();
-
 }

@@ -72,20 +72,4 @@ public class InfoSource extends Source {
     public String getInfoUuid() {
         return infoUuid;
     }
-
-    @Override
-    public String export() {
-        return exportBasic();
-    }
-
-    @Override
-    public String exportBasic() {
-
-        String uuidsText = "";
-        for (String infoUuid : infoUuids) {
-            uuidsText += (uuidsText.length() == 0) ? infoUuid : ";" + infoUuid;
-        }
-
-        return String.format("<Source name=\"%s\" type=\"%s\" infoUuid=\"%s\" />", name, type, uuidsText);
-    }
 }

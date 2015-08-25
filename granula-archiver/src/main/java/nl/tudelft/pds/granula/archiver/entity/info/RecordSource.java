@@ -47,14 +47,4 @@ public class RecordSource extends Source {
         return location;
     }
 
-    @Override
-    public String export() {
-        return exportBasic();
-    }
-
-    @Override
-    public String exportBasic() {
-        return String.format("<Source name=\"%s\" type=\"%s\" location=\"%s\" />", name, type, location);
-    }
-
 }
