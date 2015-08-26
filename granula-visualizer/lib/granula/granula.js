@@ -318,7 +318,7 @@ function loadArchive(archiveId) {
         success: function(data){
             archive.file = data;
             archive.status = "Loaded";
-            archive.jobArcs = $(archive.file).children("Workload").children("Job").map(function(){ return new JobArchive($(this))}).get();
+            archive.jobArcs = $(archive.file).children("Jobs").children("Job").map(function(){ return new JobArchive($(this))}).get();
             drawArchiveList();
             //displayDashboard();
         },

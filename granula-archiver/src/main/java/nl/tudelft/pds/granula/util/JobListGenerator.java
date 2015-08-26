@@ -33,7 +33,7 @@ public class JobListGenerator {
 
         StringBuilder xmlNodeBuilder = new StringBuilder();
 
-        xmlNodeBuilder.append("<Workload uuid=\"4938951614207141541\">");
+        xmlNodeBuilder.append("<Jobs>");
 
         File[] jobArcFiles = new File(arcFileDir).listFiles();
         Arrays.sort(jobArcFiles, new Comparator<File>() {
@@ -53,7 +53,7 @@ public class JobListGenerator {
             }
         }
 
-        xmlNodeBuilder.append("</Workload>");
+        xmlNodeBuilder.append("</Jobs>");
 
         try {
             PrintWriter writer;

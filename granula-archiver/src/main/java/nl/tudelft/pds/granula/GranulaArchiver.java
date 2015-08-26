@@ -18,7 +18,6 @@ package nl.tudelft.pds.granula;
 
 import nl.tudelft.pds.granula.archiver.process.ArchiveManager;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
-import nl.tudelft.pds.granula.archiver.entity.operation.Workload;
 import nl.tudelft.pds.granula.archiver.process.HierachyManager;
 import nl.tudelft.pds.granula.archiver.source.LogManager;
 import nl.tudelft.pds.granula.archiver.source.WorkloadLog;
@@ -33,9 +32,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 /**
  * Created by wing on 2-2-15.
@@ -57,7 +53,6 @@ public class GranulaArchiver {
 
     // deliverables
     Job job;
-    Workload workload;
 
 
 
@@ -105,9 +100,6 @@ public class GranulaArchiver {
 
         archiveManager = new ArchiveManager();
         archiveManager.build(job);
-
-        workload = new Workload();
-        workload.addJob(job);
     }
 
     public void write() {
