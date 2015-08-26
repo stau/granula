@@ -32,7 +32,7 @@ function Actor(type, id, uuid) {
 
 function getOperationActor(operation) {
 
-    var operationActor = operation.find("Actor");
+    var operationActor = operation.children("Actor");
     var type = operationActor.attr("type");
     var id = operationActor.attr("id");
     var uuid = operationActor.attr("uuid");
@@ -67,7 +67,7 @@ function Mission(type, id, name, uuid) {
 
 function getOperationMission(operation) {
 
-    var operationMission = operation.find("Mission");
+    var operationMission = operation.children("Mission");
     var type = operationMission.attr("type");
     var id = operationMission.attr("id");
     var uuid = operationMission.attr("uuid");
@@ -138,7 +138,6 @@ function Operation(operationNode) {
     this.getTitle = function () {
         var actor = getOperationActor(this.node);
         var mission = getOperationMission(this.node);
-
         var operationStr = "[" + actor + " @ " + mission + "]";
 
         return operationStr;

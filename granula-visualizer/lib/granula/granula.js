@@ -670,15 +670,8 @@ function getAncestorLink(operation) {
         currentOperation = currentOperation.getSuperoperation();
     }
 
-
-    var workloadLink = $('<a>' + selectedJobArchive.type + " [ " + selectedJobArchive.name  + " ]" + '</a>');
-    workloadLink.on('click', function (e) {
-        e.preventDefault();
-        displayDashboard();
-    });
-
     var job = new Job($(selectedJobArchive.file).find('Job[uuid=' + selectedJobUuid + ']'));
-    var jobLink = $('<a>' + job.name + '</a>');
+    var jobLink = $('<a>' + selectedJobArchive.type + " [ " + selectedJobArchive.name  + " ]" + '</a>');
     jobLink.on('click', function (e) {
         e.preventDefault();
         displayDashboard();
@@ -686,8 +679,6 @@ function getAncestorLink(operation) {
 
     //ancestorLink.prepend('&nbsp;&nbsp;');
     ancestorLink.prepend( jobLink);
-    ancestorLink.prepend('&nbsp;&nbsp;>&nbsp;&nbsp;');
-    ancestorLink.prepend( workloadLink);
 
     return ancestorLink;
 }
