@@ -207,7 +207,7 @@ function addJobList(jobListUrl) {
     } else{
         var archiveId = null;
             archiveId = (jobLists.length > 0 ) ? (_.last(jobLists)).id + 1 : 1;
-        jobLists.push(new Archive(archiveId, jobListUrl));
+        jobLists.push(new JobList(archiveId, jobListUrl));
     }
 
 }

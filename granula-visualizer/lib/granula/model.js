@@ -89,8 +89,8 @@ function Job(jobNode) {
 }
 
 
-function Archive(archiveId, url) {
-    this.id = archiveId;
+function JobList(jobListId, url) {
+    this.id = jobListId;
     this.url = url;
 
     this.file = null;
