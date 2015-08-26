@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-var archives = [];
-var selectedArchive = null;
+var jobLists = [];
+var selectedJobList = null;
 var selectedJobArchive = null;
 var selectedJobUuid = null;
 var selectedOperationUuid = null;
@@ -32,7 +32,7 @@ function loadVisualizer() {
 
     $('#cache-div').load('history.htm', function () {
         $('#cache-div #recent-arc a').each(function() {
-            addArchive($(this).text());
+            addJobList($(this).text());
         });
 
         hideAll();
@@ -151,7 +151,7 @@ function drawAbout() {
 }
 
 function selectTarget(archiveId, jobUuid, operationUuid) {
-    selectedArchive = getArchiveById(archiveId);
+    selectedJobList = getJobListById(archiveId);
     selectedJobArchive = getJobArchiveByUuid(archiveId, jobUuid);
     selectedJobUuid = jobUuid;
     selectedOperationUuid = operationUuid;
@@ -166,10 +166,10 @@ function processParameters() {
 
     if(archivePath) {
 
-        if(!archiveAdded(archivePath)) {
-            addArchive(archivePath);
+        if(!jobListAdded(archivePath)) {
+            addJobList(archivePath);
         }
-        var archive = getArchiveByURL(archivePath);
+        var archive = getJobListByURL(archivePath);
         loadArchiveAndDisplay(archive, jobUuid, operationId);
 
     } else {
@@ -193,8 +193,8 @@ function processParameters() {
 
 }
 
-function archiveAdded(archiveUrl) {
-    if(_.filter(archives, function(archive) { return archive.url === archiveUrl}).length > 0) {
+function jobListAdded(archiveUrl) {
+    if(_.filter(jobLists, function(archive) { return archive.url === archiveUrl}).length > 0) {
         return true;
     }
     else {
@@ -202,14 +202,14 @@ function archiveAdded(archiveUrl) {
     }
 }
 
-function addArchive(archiveUrl) {
+function addJobList(jobListUrl) {
 
-    if(archiveAdded(archiveUrl)) {
-        alert("Warning: Archive with url " + archiveUrl + " exists");
+    if(jobListAdded(jobListUrl)) {
+        alert("Warning: Archive with url " + jobListUrl + " exists");
     } else{
         var archiveId = null;
-            archiveId = (archives.length > 0 ) ? (_.last(archives)).id + 1 : 1;
-        archives.push(new Archive(archiveId, archiveUrl));
+            archiveId = (jobLists.length > 0 ) ? (_.last(jobLists)).id + 1 : 1;
+        jobLists.push(new Archive(archiveId, jobListUrl));
     }
 
 }
@@ -241,7 +241,7 @@ function loadArchiveAndDisplay(archive, jobUuid, operationId) {
 
             if(jobUuid || operationId) {
 
-                if($(selectedArchive.file).find('Job[uuid=' + jobUuid +']').length == 0) {
+                if($(selectedJobList.file).find('Job[uuid=' + jobUuid +']').length == 0) {
                     var opText = 'Tried to find Job [' + jobUuid + '] in Archive [' + archive.url +'].';
                     var errText = 'But Job [' + jobUuid + '] could not be found.';
                     var resText = "Redirecting to Dashboard."
@@ -253,7 +253,7 @@ function loadArchiveAndDisplay(archive, jobUuid, operationId) {
                     return;
                 }
 
-                if($(selectedArchive.file).find('Job[uuid=' + jobUuid +']').find('Operation[uuid=' + operationId +']').length == 0) {
+                if($(selectedJobList.file).find('Job[uuid=' + jobUuid +']').find('Operation[uuid=' + operationId +']').length == 0) {
                     var opText = 'Tried to find Operation [' + operationId + '] in Job [' + jobUuid +'].';
                     var errText = 'However Operation [' + operationId + '] could not be found.';
                     var resText = 'Redirecting to the top operation of Job[' + jobUuid + '].';
@@ -294,44 +294,42 @@ function loadArchiveAndDisplay(archive, jobUuid, operationId) {
 
 }
 
-function loadArchive(archiveId) {
+function loadJobList(jobListId) {
 
-    var archive = getArchiveById(archiveId);
+    var jobList = getJobListById(jobListId);
 
-    archive.status = "Loading";
+    jobList.status = "Loading";
     displayDashboard();
 
-    //var archiveTableRow = $("#dashboard .table").find('tr[archiveId=' + archiveId + ']');
-
-    if(!isSameOrigin(archive.url)) {
-        alert('Error: file ' + archive.url +' does not follow the same origin policy');
-        console.log('Error: file ' + archive.url +' does not follow the same origin policy');
-        archive.status = "Failed";
+    if(!isSameOrigin(jobList.url)) {
+        alert('Error: file ' + jobList.url +' does not follow the same origin policy');
+        console.log('Error: file ' + jobList.url +' does not follow the same origin policy');
+        jobList.status = "Failed";
         //archiveTableRow.find(".archive-status").html("Failed");
         return;
     }
 
     $.ajax({
         type: "GET",
-        url: archive.url,
+        url: jobList.url,
         dataType: 'xml',
         success: function(data){
-            archive.file = data;
-            archive.status = "Loaded";
-            archive.jobArcs = $(archive.file).children("Jobs").children("Job").map(function(){ return new JobArchive($(this))}).get();
-            drawArchiveList();
+            jobList.file = data;
+            jobList.status = "Loaded";
+            jobList.jobArcs = $(jobList.file).children("Jobs").children("Job").map(function(){ return new JobArchive($(this))}).get();
+            drawJobLists();
             //displayDashboard();
         },
         error: function(xhr, textStatus, errorThrown){
-                archive.status = "Failed";
+                jobList.status = "Failed";
             //displayDashboard();
-                console.log('Error: url ' + archive.url +' cannot be loaded');
+                console.log('Error: url ' + jobList.url +' cannot be loaded');
         }, xhr: function () {
             var xhr = new window.XMLHttpRequest();
             xhr.addEventListener("progress", function (evt) {
                 if (evt.lengthComputable) {
                     var percentComplete = evt.loaded / evt.total;
-                    archive.status  = 'Loading ' + (percentComplete * 100).toFixed(0) + '%';
+                    jobList.status  = 'Loading ' + (percentComplete * 100).toFixed(0) + '%';
                     displayDashboard();
                 }
             }, false);
@@ -367,7 +365,7 @@ function loadJobArchive(archiveId, jobArcUuid) {
         success: function(data){
             jobArc.file = data;
             jobArc.status = "Loaded";
-            drawArchiveList();
+            drawJobLists();
             //displayDashboard();
         },
         error: function(xhr, textStatus, errorThrown){
@@ -403,47 +401,46 @@ function unloadJobArchive(archiveId, jobArcUuid) {
 }
 
 
-function unloadArchive(archiveId) {
+function unloadJobList(jobListId) {
 
-    var archive = getArchiveById(archiveId);
-    var archiveTableRow = $("#dashboard .table").find('tr[archiveId=' + archiveId + ']');
+    var jobList = getJobListById(jobListId);
 
-    archive.file = null;
-    archive.status = "Unloaded";
-    archive.jobArcs = [];
+    jobList.file = null;
+    jobList.status = "Unloaded";
+    jobList.jobArcs = [];
     displayDashboard();
 
 }
 
-function getArchiveById(archiveId) {
+function getJobListById(jogListId) {
 
-    var matchedArchives = _.filter(archives, function(archiveX) { return archiveX.id == archiveId});
-    if(matchedArchives.length != 1) {console.log('Error: Find ' + matchedArchives.length  +' archives with id ' + archiveId)};
+    var matchedJobLists = _.filter(jobLists, function(archiveX) { return archiveX.id == jogListId});
+    if(matchedJobLists.length != 1) {console.log('Error: Find ' + matchedJobLists.length  +' job list with id ' + jogListId)};
 
-    return matchedArchives[0];
+    return matchedJobLists[0];
 }
 
 
 function getJobArchiveByUuid(archiveId, jobArcUuid) {
 
-    var archive = getArchiveById(archiveId);
+    var archive = getJobListById(archiveId);
     var matchedJobArchives = _.filter(archive.jobArcs, function(jobArc) { return jobArc.uuid == jobArcUuid});
     if(matchedJobArchives.length != 1) {console.log('Error: Find ' + matchedJobArchives.length  +' job archives with uuid ' + jobArcUuid)};
 
     return matchedJobArchives[0];
 }
 
-function getArchiveByURL(archiveURL) {
+function getJobListByURL(jobListUrl) {
 
-    var matchedArchives = _.filter(archives, function(archiveX) { return archiveX.url == archiveURL});
-    if(matchedArchives.length != 1) {console.log('Error: Find ' + matchedArchives.length  +' archives with url ' +  archiveURL)};
+    var matchedJobLists = _.filter(jobLists, function(jobList) { return jobList.url == jobListUrl});
+    if(matchedJobLists.length != 1) {console.log('Error: Find ' + matchedJobLists.length  +' job list with url ' +  jobListUrl)};
 
-    return matchedArchives[0];
+    return matchedJobLists[0];
 }
 
 function drawDashboard() {
 
-    drawArchiveList();
+    drawJobLists();
 
     var dashboard = $("#dashboard");
     dashboard.find('h2').html("Dashboard");
@@ -454,9 +451,9 @@ function drawDashboard() {
         e.preventDefault();
         var arcUrlInput = $("#archiveURL");
         if(arcUrlInput.val() !== "") {
-            addArchive(arcUrlInput.val());
+            addJobList(arcUrlInput.val());
             arcUrlInput.val("");
-            drawArchiveList();
+            drawJobLists();
             //drawArchiveTable();
         }
     });
@@ -528,7 +525,7 @@ function getJobItm(jobArc, arcId) {
     return jobItm;
 }
 
-function getArcItm(archive) {
+function getJobListItm(archive) {
 
 
 
@@ -564,7 +561,7 @@ function getArcItm(archive) {
     arcItm.append(btnGroup);
 
     loadBtn.on("click", function(){
-        loadArchive($(this).attr('arc-id'));
+        loadJobList($(this).attr('arc-id'));
     });
 
     //saveBtn.on("click", function(){
@@ -588,7 +585,7 @@ function getArcItm(archive) {
 
     arcItm.append(drptTxt);
 
-    //loadArchive(archive.id);
+    //loadJobList(archive.id);
 
     if(archive.file) {
 
@@ -597,7 +594,7 @@ function getArcItm(archive) {
         loadBtn.append(" Unload");
         loadBtn.off();
         loadBtn.on("click", function(){
-            unloadArchive($(this).attr('arc-id'));
+            unloadJobList($(this).attr('arc-id'));
         });
 
         //saveBtn.prop("disabled", false);
@@ -605,7 +602,7 @@ function getArcItm(archive) {
 
         var jobListPnl = $('<div id="" class="panel panel-default collapse"></div>');
         jobListPnl.attr('id', 'arc-' + archive.id +'-job-pnl');
-        if(selectedArchive && archive.id == selectedArchive.id) {
+        if(selectedJobList && archive.id == selectedJobList.id) {
             jobListPnl.addClass("in")
         }
         var jobList = $('<ul class="list-group"></ul>');
@@ -623,19 +620,19 @@ function getArcItm(archive) {
 }
 
 
-function drawArchiveList() {
+function drawJobLists() {
     var dashboard = $("#dashboard");
 
-    var arcListPnl = dashboard.find("#arc-list-pnl");
+    var jobListsPnl = dashboard.find("#arc-list-pnl");
 
-    arcListPnl.find(".panel-heading").text("Recently viewed Granula Archives");
+    jobListsPnl.find(".panel-heading").text("Recently viewed Granula Archives");
 
-    var arcList = arcListPnl.find(".arc-list");
-    arcList.empty();
+    var jobListsContainer = jobListsPnl.find(".arc-list");
+    jobListsContainer.empty();
 
-    for(var i = 0; i < archives.length; i++) {
-        var archive = archives[i];
-        arcList.append(getArcItm(archive));
+    for(var i = 0; i < jobLists.length; i++) {
+        var archive = jobLists[i];
+        jobListsContainer.append(getJobListItm(archive));
     }
 }
 
