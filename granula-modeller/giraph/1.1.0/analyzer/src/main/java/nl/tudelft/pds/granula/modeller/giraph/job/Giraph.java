@@ -89,45 +89,49 @@ public class Giraph extends JobModel {
         @Override
         public boolean execute() {
 
-                Job job = (Job) entity;
+            Job job = (Job) entity;
 
-                Operation bspIteration = null;
-                Operation containerAssignment = null;
-                for(Operation operation: job.getTopOperation().getChildren()) {
-                    if(operation.hasType(GiraphType.AppMaster, GiraphType.BspExecution)) {
-                        for (Operation suboperation : operation.getChildren()) {
-                            if (suboperation.hasType(GiraphType.BspMaster, GiraphType.BspIteration)) {
-                                bspIteration = suboperation;
-                            }
+            Operation bspIteration = null;
+            Operation containerAssignment = null;
+            for (Operation operation : job.getTopOperation().getChildren()) {
+                if (operation.hasType(GiraphType.AppMaster, GiraphType.BspExecution)) {
+                    for (Operation suboperation : operation.getChildren()) {
+                        if (suboperation.hasType(GiraphType.BspMaster, GiraphType.BspIteration)) {
+                            bspIteration = suboperation;
                         }
                     }
                 }
-                for(Operation operation: job.getTopOperation().getChildren()) {
-                    if(operation.hasType(GiraphType.AppMaster, GiraphType.Deployment)) {
-                        for (Operation suboperation : operation.getChildren()) {
-                            if(suboperation.hasType(GiraphType.AppMaster, GiraphType.ContainerAssignment)) {
-                                containerAssignment = suboperation;
-                            }
+            }
+            for (Operation operation : job.getTopOperation().getChildren()) {
+                if (operation.hasType(GiraphType.AppMaster, GiraphType.Deployment)) {
+                    for (Operation suboperation : operation.getChildren()) {
+                        if (suboperation.hasType(GiraphType.AppMaster, GiraphType.ContainerAssignment)) {
+                            containerAssignment = suboperation;
                         }
                     }
                 }
+            }
 
-                Info numContainers = containerAssignment.getInfo("NumContainers");
-                Info containerHeapSize = containerAssignment.getInfo("ContainerHeapSize");
+            Info numContainers = containerAssignment.getInfo("NumContainers");
+            Info containerHeapSize = containerAssignment.getInfo("ContainerHeapSize");
 
-                Info computeClass = bspIteration.getInfo("ComputationClass");
-                Info dataInputPath = bspIteration.getInfo("DataInputPath");
+            Info computeClass = bspIteration.getInfo("ComputationClass");
+            Info dataInputPath = bspIteration.getInfo("DataInputPath");
 
-                String fileName = new File(dataInputPath.getValue()).getName();
+            String fileName = new File(dataInputPath.getValue()).getName();
 
-                String jobName = String.format("Job[%s-%s, %sx%sMB]",
-                        computeClass.getValue().replace("Computation", ""), fileName,
-                        numContainers.getValue(), containerHeapSize.getValue());
+            String jobName = String.format("%s-%s, %sx%sMB",
+                    computeClass.getValue().replace("Computation", ""), fileName,
+                    numContainers.getValue(), containerHeapSize.getValue());
 
             BasicInfo jobNameInfo = new BasicInfo("JobName");
-                jobNameInfo.addInfo(jobName, new ArrayList<Source>());
-                job.addInfo(jobNameInfo);
-                return  true;
+            jobNameInfo.addInfo(jobName, new ArrayList<Source>());
+            job.addInfo(jobNameInfo);
+
+            job.setName(jobName);
+            job.setType("Giraph");
+
+            return true;
 
         }
     }

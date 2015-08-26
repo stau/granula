@@ -86,32 +86,37 @@ public class GraphX extends JobModel {
         @Override
         public boolean execute() {
 
-                Job job = (Job) entity;
+            Job job = (Job) entity;
 
-                Operation topOperation = null;
-                for(Operation operation: job.getMemberOperations()) {
-                    if(operation.hasType(GraphXType.TopActor, GraphXType.TopMission)) {
-                        topOperation = operation;
-                    }
+            Operation topOperation = null;
+            for (Operation operation : job.getMemberOperations()) {
+                if (operation.hasType(GraphXType.TopActor, GraphXType.TopMission)) {
+                    topOperation = operation;
                 }
+            }
 
-                Info executorSize = topOperation.getInfo("ExecutorSize");
-                Info executorMemory = topOperation.getInfo("ExecutorMemory");
+            Info executorSize = topOperation.getInfo("ExecutorSize");
+            Info executorMemory = topOperation.getInfo("ExecutorMemory");
 
-                Info computeClass = topOperation.getInfo("ApplicationName");
-                Info dataInputPath = topOperation.getInfo("DataInputPath");
+            Info computeClass = topOperation.getInfo("ApplicationName");
+            Info dataInputPath = topOperation.getInfo("DataInputPath");
 
-                String fileName = new File(dataInputPath.getValue()).getName().replace("_FCF", "");
+            String fileName = new File(dataInputPath.getValue()).getName().replace("_FCF", "");
 
-                String jobName = String.format("Job[%s-%s, %sx%sMB]",
-                        computeClass.getValue().replace("Computation", ""), fileName,
-                        executorSize.getValue(), executorMemory.getValue());
+            String jobName = String.format("%s-%s, %sx%sMB",
+                    computeClass.getValue().replace("Computation", ""), fileName,
+                    executorSize.getValue(), executorMemory.getValue());
 
 
             BasicInfo jobNameInfo = new BasicInfo("JobName");
-                jobNameInfo.addInfo(jobName, new ArrayList<Source>());
-                job.addInfo(jobNameInfo);
-                return  true;
+            jobNameInfo.addInfo(jobName, new ArrayList<Source>());
+            job.addInfo(jobNameInfo);
+
+
+            job.setName(jobName);
+            job.setType("GraphX");
+
+            return true;
 
         }
     }

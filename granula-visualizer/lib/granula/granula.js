@@ -83,7 +83,7 @@ function drawJobPerformance() {
     }
     else if (selectedJobUuid) {
 
-        var jobNode = $(selectedJobArchive.file).children("Workload").children('Job[uuid=' + selectedJobUuid + ']');
+        var jobNode = $(selectedJobArchive.file).children('Job[uuid=' + selectedJobUuid + ']');
         var topOperation = new Operation(jobNode.children("Operations").children("Operation"));
         drawOperation(topOperation.uuid);
     }
@@ -487,7 +487,9 @@ function getJobItm(jobArc, arcId) {
     //jobViewBtn.attr('op-uuid', job.topOperation.uuid);
     jobViewBtn.append($('<span class="glyphicon glyphicon glyphicon-fullscreen"></span>') );
     jobViewBtn.append(' View');
+    jobViewBtn.prop("disabled", true);
     jobBtnGroup.append(jobViewBtn);
+
 
 
 
@@ -510,6 +512,9 @@ function getJobItm(jobArc, arcId) {
 
 
     if(jobArc.file) {
+
+        jobViewBtn.prop("disabled", false);
+
         jobLoadBtn.empty();
         jobLoadBtn.append($('<span class="glyphicon glyphicon glyphicon-pause"></span>') );
         jobLoadBtn.append(" Unload");
@@ -635,7 +640,7 @@ function drawArchiveList() {
 }
 
 function drawTopOperation() {
-    $(selectedJobArchive.file).children("Workload").children("Job").children("Operations").children("Operation").each(function () {
+    $(selectedJobArchive.file).children("Job").children("Operations").children("Operation").each(function () {
         drawOperation(new Operation($(this)).uuid);
     });
 
@@ -666,7 +671,7 @@ function getAncestorLink(operation) {
     }
 
 
-    var workloadLink = $('<a>' + '[' + get2Digit(selectedJobArchive.id) + ' ' + getFilename(selectedJobArchive.url) + ']' + '</a>');
+    var workloadLink = $('<a>' + selectedJobArchive.type + " [ " + selectedJobArchive.name  + " ]" + '</a>');
     workloadLink.on('click', function (e) {
         e.preventDefault();
         displayDashboard();
@@ -694,7 +699,7 @@ function drawOperation(operationId) {
 
     selectedOperationUuid = operationId;
 
-    var operationNode = $(selectedJobArchive.file).children("Workload").children("Job").children("Operations").find('Operation[uuid="' + operationId + '"]');
+    var operationNode = $(selectedJobArchive.file).children("Job").children("Operations").find('Operation[uuid="' + operationId + '"]');
     plotOperation(operationNode);
 
     var perfBoard = $("#perfboard");
@@ -742,7 +747,7 @@ function drawOperation(operationId) {
         var urlPnl = modal.find(".url-pnl");
 
         var job = new Job($(selectedJobArchive.file).find('Job[uuid=' + selectedJobUuid + ']'));
-        var operation = new Operation($(selectedJobArchive.file).children("Workload").children("Job").children("Operations").find('Operation[uuid="' + operationId + '"]'));
+        var operation = new Operation($(selectedJobArchive.file).children("Job").children("Operations").find('Operation[uuid="' + operationId + '"]'));
         var contextText = 'You are currently viewing Operation [' + operation.name + '] of Job [' + job.name  + '], found in Granula Archive [' + selectedJobArchive.url + ']. ';
         var actionText = 'Please use the following URL to share/bookmark this view: ';
         drptText.empty().append($('<p>' + contextText + ' ' + actionText + '</p>'));
@@ -755,7 +760,7 @@ function drawOperation(operationId) {
     });
 
     viewBtn.on("click", function(){
-        var operationNode = $(selectedJobArchive.file).children("Workload").children("Job").children("Operations").find('Operation[uuid="' + operationId + '"]');
+        var operationNode = $(selectedJobArchive.file).children("Job").children("Operations").find('Operation[uuid="' + operationId + '"]');
         var xmlFull = (new XMLSerializer()).serializeToString(operationNode[0]);
         var xmlIm = $(xmlFull);
         xmlIm.children('Children').children('Operation').empty();

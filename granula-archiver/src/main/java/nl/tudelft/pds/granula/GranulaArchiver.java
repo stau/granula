@@ -24,8 +24,8 @@ import nl.tudelft.pds.granula.archiver.source.LogManager;
 import nl.tudelft.pds.granula.archiver.source.WorkloadLog;
 import nl.tudelft.pds.granula.archiver.source.record.JobRecord;
 import nl.tudelft.pds.granula.archiver.process.RecordManager;
-import nl.tudelft.pds.granula.archiver.test.Customer;
 import nl.tudelft.pds.granula.modeller.model.job.JobModel;
+import nl.tudelft.pds.granula.util.JobListGenerator;
 import nl.tudelft.pds.granula.util.ProgressUtil;
 import nl.tudelft.pds.granula.util.XMLFormatter;
 
@@ -114,31 +114,22 @@ public class GranulaArchiver {
 
         try {
 
-            JAXBContext jaxbContext = JAXBContext.newInstance(Workload.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Job.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 //            jaxbMarshaller.marshal(workload, System.out);
-            jaxbMarshaller.marshal(workload, new File(outputPath));
+            jaxbMarshaller.marshal(job, new File(outputPath + job.getUuid() + ".xml"));
 
         } catch (JAXBException e) {
             e.printStackTrace();
         }
 
-//        String xml = workload.export();
-//          xml = XMLFormatter.format(workload.export());
-//
-//            try {
-//                PrintWriter writer;
-//                writer = new PrintWriter(outputPath, "UTF-8");
-//                writer.print(xml);
-//                writer.close();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        (new JobListGenerator()).generateRecentJobsList();
     }
+
+
 
 }

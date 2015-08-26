@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class GraphXArchiver {
     public static void main(String[] args) {
 
-        String repoPath = "/home/wing/Workstation/Dropbox/Repo/granula";
+        String repoPath = ArchiverConfiguration.repoPath;
 
         String workloadDirPath = repoPath + "/data/input/";
         File workloadDir = new File(workloadDirPath);
@@ -27,7 +27,7 @@ public class GraphXArchiver {
         workloadFile = new File(repoPath + "/data/input/graphx.tar.gz");
         WorkloadLog workloadLog = new WorkloadLog(workloadFile.getName().replace(".tar.gz", ""), workloadDirPath + workloadFile.getName());
 
-        String outputPath = repoPath + "/granula-visualizer/archive/most-updated.xml";
+        String outputPath = repoPath + "/granula-visualizer/archive/";
 //        String outputPath = String.format("/home/wing/Workstation/Dropbox/Repo/granula/data/output/graphx.xml", workloadLog.getName());
 
 
