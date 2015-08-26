@@ -17,7 +17,6 @@
 var jobLists = [];
 var selectedJobList = null;
 var selectedJobArchive = null;
-var selectedJobUuid = null;
 var selectedOperationUuid = null;
 
 var columns = new Columns();
@@ -81,9 +80,9 @@ function drawJobPerformance() {
     if(selectedOperationUuid) {
         drawOperation(selectedOperationUuid);
     }
-    else if (selectedJobUuid) {
+    else if (selectedJobArchive) {
 
-        var jobNode = $(selectedJobArchive.file).children('Job[uuid=' + selectedJobUuid + ']');
+        var jobNode = $(selectedJobArchive.file).children("Job");
         var topOperation = new Operation(jobNode.children("Operations").children("Operation"));
         drawOperation(topOperation.uuid);
     }
@@ -153,7 +152,6 @@ function drawAbout() {
 function selectTarget(archiveId, jobUuid, operationUuid) {
     selectedJobList = getJobListById(archiveId);
     selectedJobArchive = getJobArchiveByUuid(archiveId, jobUuid);
-    selectedJobUuid = jobUuid;
     selectedOperationUuid = operationUuid;
 }
 
@@ -248,7 +246,6 @@ function loadArchiveAndDisplay(archive, jobUuid, operationId) {
                     drawNotificationTraceModal("Job Retrieval Failed", opText, errText, resText);
                     showNotificationModal();
                     displayDashboard();
-                    selectedJobUuid = null;
                     selectedOperationUuid = null;
                     return;
                 }
@@ -462,7 +459,7 @@ function drawDashboard() {
 function getJobItm(jobArc, arcId) {
 
     var jobItm = $('<li class="list-group-item job-item">' + jobArc.type + " [ " + jobArc.name  + " ]" +'</li>');
-    if(selectedJobUuid == jobArc.uuid) {
+    if(selectedJobArchive == jobArc) {
         jobItm.addClass("selected-job-item");
     }
     jobItm.append(' (' + jobArc.status + ')');
@@ -667,7 +664,6 @@ function getAncestorLink(operation) {
         currentOperation = currentOperation.getSuperoperation();
     }
 
-    var job = new Job($(selectedJobArchive.file).find('Job[uuid=' + selectedJobUuid + ']'));
     var jobLink = $('<a>' + selectedJobArchive.type + " [ " + selectedJobArchive.name  + " ]" + '</a>');
     jobLink.on('click', function (e) {
         e.preventDefault();
@@ -701,7 +697,7 @@ function drawOperation(operationId) {
     btnGroup.empty();
 
     var shareBtn = $('<button class="btn btn-default share-btn">Share</button>');
-    var url = getDomainURL() + '?' + 'arc=' + selectedJobArchive.url + '&' + 'job=' + selectedJobUuid + '&' + 'operation=' + selectedOperationUuid;
+    var url = getDomainURL() + '?' + 'arc=' + selectedJobArchive.url + '&' + 'operation=' + selectedOperationUuid;
     shareBtn.attr('url', url);
 
     var viewBtn = $('<button class="btn btn-default view-btn">View</button>');
@@ -734,7 +730,7 @@ function drawOperation(operationId) {
         var drptText = modal.find(".drpt-text");
         var urlPnl = modal.find(".url-pnl");
 
-        var job = new Job($(selectedJobArchive.file).find('Job[uuid=' + selectedJobUuid + ']'));
+        var job = new Job($(selectedJobArchive.file).find("Job"));
         var operation = new Operation($(selectedJobArchive.file).children("Job").children("Operations").find('Operation[uuid="' + operationId + '"]'));
         var contextText = 'You are currently viewing Operation [' + operation.name + '] of Job [' + job.name  + '], found in Granula Archive [' + selectedJobArchive.url + ']. ';
         var actionText = 'Please use the following URL to share/bookmark this view: ';
