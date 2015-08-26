@@ -54,8 +54,6 @@ public class GranulaArchiver {
     // deliverables
     Job job;
 
-
-
     public GranulaArchiver(WorkloadLog workloadLog, JobModel jobModel, String outputPath) {
         progressUtil = new ProgressUtil();
         this.workloadLog = workloadLog;
