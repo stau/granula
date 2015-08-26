@@ -394,7 +394,7 @@ function DescriptionVisual(drptNode) {
     this.construct = function () {
 
         var summaryInfoUuid = this.drptNode.children("SummarySource").children("Source").attr("infoUuid");
-        var summaryInfo = new SummaryInfo($(selectedArchive.file).find('Info[uuid=' + summaryInfoUuid + ']'));
+        var summaryInfo = new SummaryInfo($(selectedJobArchive.file).find('Info[uuid=' + summaryInfoUuid + ']'));
 
         this.table = "";
         this.table += '<table class="table table-bordered drpt-table">';
@@ -458,7 +458,7 @@ function TableVisual(tblNode) {
         var numRows = 0;
 
         var infoSources = this.tblNode.children("TableCell").children("Source");
-        var infos = infoSources.map( function () { return new Info($(selectedArchive.file).find('Info[uuid=' + $(this).attr("infoUuid") + ']')); }).get();
+        var infos = infoSources.map( function () { return new Info($(selectedJobArchive.file).find('Info[uuid=' + $(this).attr("infoUuid") + ']')); }).get();
 
         this.table = "";
         this.table += '<table class="table table-hover table-bordered">';
@@ -534,7 +534,7 @@ function TimeSeriesVisual(tsVisualNode) {
         var y1Timelines = [];
         if(y1AxisNode.length > 0) {
             var y1TSInfoSources = tsVisualNode.children("Axis[type=y1]").children("TimeSeriesSources").children("Source");
-            var y1TSInfos =  y1TSInfoSources.map( function () { return $(selectedArchive.file).find('Info[uuid=' + $(this).attr("infoUuid") + ']'); });
+            var y1TSInfos =  y1TSInfoSources.map( function () { return $(selectedJobArchive.file).find('Info[uuid=' + $(this).attr("infoUuid") + ']'); });
 
             y1Timelines = y1TSInfos.map( function () {
                 var tsInfo = $(this);
@@ -547,7 +547,7 @@ function TimeSeriesVisual(tsVisualNode) {
         var y2Timelines = [];
         if(y2AxisNode.length > 0) {
             var y2TSInfoSources = tsVisualNode.children("Axis[type=y2]").children("TimeSeriesSources").children("Source");
-            var y2TSInfos =  y2TSInfoSources.map( function () { return $(selectedArchive.file).find('Info[uuid=' + $(this).attr("infoUuid") + ']'); });
+            var y2TSInfos =  y2TSInfoSources.map( function () { return $(selectedJobArchive.file).find('Info[uuid=' + $(this).attr("infoUuid") + ']'); });
 
             y2Timelines = y2TSInfos.map( function () {
                 var tsInfo = $(this);

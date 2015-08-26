@@ -88,6 +88,48 @@ function Job(jobNode) {
     };
 }
 
+
+function Archive(archiveId, url) {
+    this.id = archiveId;
+    this.url = url;
+
+    this.file = null;
+    this.jobArcs = [];
+
+    this.status = "Unverified";
+
+    this.load = function() {
+        this.status = "Loaded";
+    }
+
+    this.unload = function() {
+        this.file = null;
+        this.status = "Unloaded";
+    }
+}
+
+function JobArchive(jobNode) {
+
+    this.uuid = jobNode.attr("uuid");
+    this.name = jobNode.attr("name");
+    this.type = jobNode.attr("type");
+
+    this.url = jobNode.children("Url").text();
+    this.description = jobNode.children("Description").text();
+
+    this.file = null;
+    this.status = "Unverified";
+
+    this.load = function() {
+        this.status = "Loaded";
+    }
+
+    this.unload = function() {
+        this.file = null;
+        this.status = "Unloaded";
+    }
+}
+
 function Operation(operationNode) {
     this.node = operationNode;
     this.uuid = operationNode.attr("uuid");
