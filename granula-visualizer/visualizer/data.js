@@ -20,7 +20,6 @@ var selectedJobList = null;
 var selectedJobArchive = null;
 var selectedOperationUuid = null;
 
-var columns = new Columns();
 
 var fv_open_modals = 0;
 
@@ -267,4 +266,11 @@ function getJobListByURL(jobListUrl) {
     if(matchedJobLists.length != 1) {console.log('Error: Find ' + matchedJobLists.length  +' job list with url ' +  jobListUrl)};
 
     return matchedJobLists[0];
+}
+
+
+function selectTarget(archiveId, jobUuid, operationUuid) {
+    selectedJobList = getJobListById(archiveId);
+    selectedJobArchive = getJobArchiveByUuid(archiveId, jobUuid);
+    selectedOperationUuid = operationUuid;
 }
