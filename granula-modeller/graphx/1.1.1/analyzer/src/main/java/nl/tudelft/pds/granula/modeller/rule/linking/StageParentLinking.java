@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nl.tudelft.pds.granula.modeller.graphx.rule;
+package nl.tudelft.pds.granula.modeller.rule.linking;
 
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
 import nl.tudelft.pds.granula.modeller.rule.linking.LinkingRule;

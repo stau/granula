@@ -26,7 +26,7 @@ import nl.tudelft.pds.granula.modeller.rule.derivation.DerivationRule;
 import nl.tudelft.pds.granula.modeller.rule.filling.UniqueOperationFilling;
 import nl.tudelft.pds.granula.modeller.graphx.GraphXType;
 import nl.tudelft.pds.granula.modeller.graphx.operation.*;
-import nl.tudelft.pds.granula.modeller.rule.GraphXExtractionRule;
+import nl.tudelft.pds.granula.modeller.rule.extraction.GraphXExtractionRule;
 
 import java.io.File;
 import java.util.ArrayList;

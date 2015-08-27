@@ -1,4 +1,4 @@
-package nl.tudelft.pds.granula.modeller.rule;
+package nl.tudelft.pds.granula.modeller.rule.extraction;
 
 import nl.tudelft.pds.granula.archiver.source.record.Record;
 import nl.tudelft.pds.granula.archiver.source.record.RecordLocation;

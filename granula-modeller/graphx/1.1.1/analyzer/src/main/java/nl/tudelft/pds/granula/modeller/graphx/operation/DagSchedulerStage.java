@@ -29,7 +29,7 @@ import nl.tudelft.pds.granula.modeller.rule.derivation.time.FilialEndTimeDerivat
 import nl.tudelft.pds.granula.modeller.rule.derivation.time.FilialStartTimeDerivation;
 import nl.tudelft.pds.granula.modeller.rule.visual.MainInfoTableVisualization;
 import nl.tudelft.pds.granula.modeller.graphx.GraphXType;
-import nl.tudelft.pds.granula.modeller.graphx.rule.StageParentLinking;
+import nl.tudelft.pds.granula.modeller.rule.linking.StageParentLinking;
 
 import java.util.ArrayList;
 
