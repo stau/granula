@@ -16,7 +16,6 @@
 
 package nl.tudelft.pds.granula.archiver.entity.info;
 
-import nl.tudelft.pds.granula.ArchiverConfiguration;
 import nl.tudelft.pds.granula.archiver.entity.Attribute;
 import nl.tudelft.pds.granula.archiver.entity.Identifier;
 

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class GraphXArchiver {
     public static void main(String[] args) {
 
-        String repoPath = ArchiverConfiguration.repoPath;
+        String repoPath = Configuration.repoPath;
 
         String workloadDirPath = repoPath + "/data/input/";
         File workloadDir = new File(workloadDirPath);

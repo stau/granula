@@ -16,7 +16,7 @@
 
 package nl.tudelft.pds.granula.modeller.model.operation;
 
-import nl.tudelft.pds.granula.ArchiverConfiguration;
+import nl.tudelft.pds.granula.Configuration;
 import nl.tudelft.pds.granula.archiver.entity.Entity;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
 import nl.tudelft.pds.granula.modeller.model.Model;
@@ -63,7 +63,7 @@ public abstract class OperationModel extends Model {
 //        addInfoDerivation(new UnusedRecordInfoDerivation(2));
         addVisualDerivation(new SummaryVisualization(1));
         //addVisualDerivation(new AllBasicInfoTableVisualOperationDerivation(1));
-        if(!ArchiverConfiguration.ExportDescription) {
+        if(!Configuration.ExportDescription) {
             addInfoDerivation(new EmptySummaryDerivation(11));
         }
     }

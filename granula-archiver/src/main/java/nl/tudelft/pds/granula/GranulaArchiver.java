@@ -110,7 +110,6 @@ public class GranulaArchiver {
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-//            jaxbMarshaller.marshal(workload, System.out);
             jaxbMarshaller.marshal(job, new File(outputPath + job.getUuid() + ".xml"));
 
         } catch (JAXBException e) {

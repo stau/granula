@@ -1,6 +1,6 @@
 package nl.tudelft.pds.granula.util;
 
-import nl.tudelft.pds.granula.ArchiverConfiguration;
+import nl.tudelft.pds.granula.Configuration;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -23,7 +23,7 @@ public class JobListGenerator {
     }
 
     public void generateRecentJobsList() {
-        String vizRepoPath = ArchiverConfiguration.repoPath + "/granula-visualizer";
+        String vizRepoPath = Configuration.repoPath + "/granula-visualizer";
         generateForEntireDirectory(
                 vizRepoPath + "/data/archive/",
                 vizRepoPath + "/data/list" + "/recent-jobs.xml");

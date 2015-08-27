@@ -16,7 +16,7 @@
 
 package nl.tudelft.pds.granula;
 
-public class ArchiverConfiguration {
+public class Configuration {
     public static boolean ExportDescription = true;
     public static String repoPath = "/home/wing/Workstation/Dropbox/Repo/granula";
 }
