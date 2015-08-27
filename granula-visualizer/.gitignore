@@ -1,4 +1,4 @@
 *.iml
 /.idea
-/archive
-/list
+/data/archive
+/data/list

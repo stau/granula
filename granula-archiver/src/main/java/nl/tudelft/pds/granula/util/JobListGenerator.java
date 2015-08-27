@@ -24,12 +24,12 @@ public class JobListGenerator {
 
     public void generateRecentJobsList() {
         String vizRepoPath = ArchiverConfiguration.repoPath + "/granula-visualizer";
-        generateForDirectory(
-                vizRepoPath + "/archive/",
-                vizRepoPath + "/list" + "/recent-jobs.xml");
+        generateForEntireDirectory(
+                vizRepoPath + "/data/archive/",
+                vizRepoPath + "/data/list" + "/recent-jobs.xml");
     }
 
-    public void generateForDirectory(String arcFileDir, String outputPath) {
+    public void generateForEntireDirectory(String arcFileDir, String outputPath) {
 
         StringBuilder xmlNodeBuilder = new StringBuilder();
 
@@ -43,13 +43,11 @@ public class JobListGenerator {
             }
         });
 
-        for (File workloadFile : jobArcFiles) {
-            if(workloadFile.isFile()) {
-                if(!workloadFile.getName().equals("list.xml")) {
-                    System.out.println(workloadFile.getAbsolutePath());
-                    xmlNodeBuilder.append(generateJobXmlNode(workloadFile.getAbsolutePath()));
-                }
-
+        for (File arcFile : jobArcFiles) {
+            if(arcFile.isFile()) {
+                System.out.println(arcFile.getAbsolutePath());
+                String arcFileUrl = "data/archive/" + new File(arcFile.getAbsolutePath()).getName();
+                xmlNodeBuilder.append(generateJobXmlNode(arcFile.getAbsolutePath(), arcFileUrl));
             }
         }
 
@@ -67,6 +65,10 @@ public class JobListGenerator {
     }
 
     public String generateJobXmlNode(String jobArcFilePath) {
+        return generateJobXmlNode(jobArcFilePath, new File(jobArcFilePath).getName());
+    }
+
+    public String generateJobXmlNode(String jobArcFilePath, String renamedfilePath) {
 
         String jobXmlNode = null;
 
@@ -82,12 +84,11 @@ public class JobListGenerator {
             String jobType = rootNode.getAttribute("type").getValue();
             String jobUuid = rootNode.getAttribute("uuid").getValue();
 
-            String jobUrl = "archive/" + new File(jobArcFilePath).getName();
             String jobDescription = jobName;
 
             StringBuilder xmlNodeBuilder = new StringBuilder();
             xmlNodeBuilder.append(String.format("<Job uuid=\"%s\" name=\"%s\" type=\"%s\">", jobUuid, jobName, jobType));
-            xmlNodeBuilder.append(String.format("<Url>%s</Url>", jobUrl));
+            xmlNodeBuilder.append(String.format("<Url>%s</Url>", renamedfilePath));
             xmlNodeBuilder.append(String.format("<Description>%s</Description>", jobDescription));
             xmlNodeBuilder.append(String.format("</Job>"));
             jobXmlNode = xmlNodeBuilder.toString();
@@ -100,7 +101,7 @@ public class JobListGenerator {
         }
 
         if(jobXmlNode == null) {
-            System.out.println(String.format("Failed to read job archive at %s.", jobArcFilePath));
+            System.out.println(String.format("Warning: failed to read job archive at %s.", jobArcFilePath));
         }
 
         return jobXmlNode;

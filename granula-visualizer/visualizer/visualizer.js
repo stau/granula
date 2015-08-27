@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 function loadVisualizer() {
 
-    $('#cache-div').load('history.htm', function () {
+    $('#cache-div').load('data/history.htm', function () {
         $('#cache-div #recent-arc a').each(function() {
             addJobList($(this).text());
         });

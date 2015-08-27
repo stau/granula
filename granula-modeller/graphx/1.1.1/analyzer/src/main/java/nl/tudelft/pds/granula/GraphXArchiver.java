@@ -27,7 +27,7 @@ public class GraphXArchiver {
         workloadFile = new File(repoPath + "/data/input/graphx.tar.gz");
         WorkloadLog workloadLog = new WorkloadLog(workloadFile.getName().replace(".tar.gz", ""), workloadDirPath + workloadFile.getName());
 
-        String outputPath = repoPath + "/granula-visualizer/archive/";
+        String outputPath = repoPath + "/granula-visualizer/data/archive/";
 //        String outputPath = String.format("/home/wing/Workstation/Dropbox/Repo/granula/data/output/graphx.xml", workloadLog.getName());
 
 
