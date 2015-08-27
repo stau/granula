@@ -361,7 +361,8 @@ function OperationVisual(operation) {
             var submissionDrawable = new RectDrawable();
             submissionDrawable.setCoordinate(suboperationX, suboperationY, suboperationW, suboperationH);
             submissionDrawable.setColor("#3399FF").setStroke(0.5, "#0033CC").setUuid(suboperation.uuid)
-            submissionDrawable.setHint(suboperation.getMission().name).setColor(suboperation.getInfo("Color").value);
+            submissionDrawable.setHint(suboperation.getMission().name);
+            submissionDrawable.setColor(suboperation.getInfo("Color").value).setStroke(0.5, change_brightness(suboperation.getInfo("Color").value, -80));
             submissionDrawable.setClickEvent(function reloadOperationEvent(event) {
                 drawOperation(this.attr("uuid"));
             });
