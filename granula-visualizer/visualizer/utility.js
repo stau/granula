@@ -159,7 +159,7 @@ function getPrintableXml(xmlNode) {
 function change_brightness(hex, percent){
     // strip the leading # if it's there
     hex = hex.replace(/^\s*#|\s*$/g, '');
-    
+
     // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
     if(hex.length == 3){
         hex = hex.replace(/(.)/g, '$1$1');

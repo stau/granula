@@ -15,16 +15,16 @@ public class GraphXArchiver {
         String repoPath = Configuration.repoPath;
 
         String workloadDirPath = repoPath + "/data/input/";
-        File workloadDir = new File(workloadDirPath);
-        File[] workloadFiles = workloadDir.listFiles();
-
-        if(workloadFiles == null || workloadFiles.length < 1) {
-            throw new IllegalStateException("No data source found.");
-        }
-
-        Arrays.sort(workloadFiles);
-        File workloadFile =workloadFiles[workloadFiles.length - 1];
-        workloadFile = new File(repoPath + "/data/input/graphx.tar.gz");
+//        File workloadDir = new File(workloadDirPath);
+//        File[] workloadFiles = workloadDir.listFiles();
+//
+//        if(workloadFiles == null || workloadFiles.length < 1) {
+//            throw new IllegalStateException("No data source found.");
+//        }
+//
+//        Arrays.sort(workloadFiles);
+//        File workloadFile =workloadFiles[workloadFiles.length - 1];
+        File workloadFile = new File(repoPath + "/data/input/graphx2.tar.gz");
         WorkloadLog workloadLog = new WorkloadLog(workloadFile.getName().replace(".tar.gz", ""), workloadDirPath + workloadFile.getName());
 
         String outputPath = repoPath + "/granula-visualizer/data/archive/";
