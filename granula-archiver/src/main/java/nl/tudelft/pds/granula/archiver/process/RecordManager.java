@@ -18,7 +18,7 @@ package nl.tudelft.pds.granula.archiver.process;
 
 import nl.tudelft.pds.granula.archiver.entity.info.TimeSeries;
 import nl.tudelft.pds.granula.archiver.entity.operation.Job;
-import nl.tudelft.pds.granula.archiver.source.JobDataSource;
+import nl.tudelft.pds.granula.archiver.source.JobSource;
 import nl.tudelft.pds.granula.archiver.source.record.JobRecord;
 import nl.tudelft.pds.granula.archiver.source.record.Record;
 import nl.tudelft.pds.granula.archiver.source.record.RecordLocation;
@@ -36,26 +36,27 @@ import java.util.List;
 public class RecordManager {
 
     protected Job job;
-    protected JobDataSource jobDataSource;
+    protected JobSource jobSource;
 
 
-    public RecordManager(Job job, JobDataSource jobDataSource) {
+    public RecordManager(Job job, JobSource embeddedJobSource) {
         this.job = job;
-        this.jobDataSource = jobDataSource;
+        this.jobSource = embeddedJobSource;
     }
 
 
     public void extract() {
-        job.setJobRecord(extractJobRecord(jobDataSource));
+        job.setJobRecord(extractJobRecord(jobSource));
     }
 
 
-    public JobRecord extractJobRecord(JobDataSource jobDataSource) {
+    public JobRecord extractJobRecord(JobSource jobSource) {
 
         final JobRecord jobRecord = new JobRecord();
 
-        for (File jobLobFile : jobDataSource.getJobLogFiles()) {
-            List<Record> records = extractRecordFromFile(jobLobFile);
+
+        for (InputStream inputStream :jobSource.getOperationSource().getInputStreams()) {
+            List<Record> records = extractOperationRecord(inputStream);
             jobRecord.addRecords(records);
         }
 
@@ -102,10 +103,10 @@ public class RecordManager {
 
 
 
-    public List<Record> extractRecordFromFile(File file) {
+    public List<Record> extractOperationRecord(InputStream inputStream) {
         JobModel jobModel = (JobModel) job.getModel();
         ExtractionRule extractionRule = jobModel.getExtractionRules().get(0);
-        return extractionRule.extractRecordFromFile(file);
+        return extractionRule.extractRecordFromInputStream(inputStream);
     }
 
 

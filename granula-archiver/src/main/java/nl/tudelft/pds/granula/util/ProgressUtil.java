@@ -11,7 +11,6 @@ public class ProgressUtil {
 
     private long overallTime;
 
-    private long decompressionTime;
     private long assemblingTime;
     private long writingTime;
 
@@ -23,8 +22,7 @@ public class ProgressUtil {
         System.out.println(String.format("Archiving workload at: %s.", new Date(startTime)));
         System.out.println(String.format("Archived workload at: %s.", new Date(endTime)));
 
-        System.out.println(String.format("Archive decompression takes %.1f seconds.", (decompressionTime - startTime) / 1000.0d));
-        System.out.println(String.format("Archive assembling takes %.1f seconds.", (assemblingTime - decompressionTime) / 1000.0d));
+        System.out.println(String.format("Archive assembling takes %.1f seconds.", (assemblingTime - startTime) / 1000.0d));
         System.out.println(String.format("Archive writing takes %.1f seconds.", (writingTime - assemblingTime) / 1000.0d));
         System.out.println(String.format("Archiving takes %.1f seconds.", (endTime - startTime) / 1000.0d));
 
@@ -53,15 +51,6 @@ public class ProgressUtil {
     public void setOverallTime(long overallTime) {
         this.overallTime = overallTime;
     }
-
-    public long getDecompressionTime() {
-        return decompressionTime;
-    }
-
-    public void setDecompressionTime(long decompressionTime) {
-        this.decompressionTime = decompressionTime;
-    }
-
 
     public long getAssemblingTime() {
         return assemblingTime;

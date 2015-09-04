@@ -22,12 +22,11 @@ public class GraphXExtractionRule extends ExtractionRule {
         return false;
     }
 
-    public List<Record> extractRecordFromFile(File file) {
+    public List<Record> extractRecordFromInputStream(InputStream fis) {
 
         List<Record> granularlogList = new ArrayList<>();
 
         try {
-            FileInputStream fis = new FileInputStream(file);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
             String line = null;
@@ -45,8 +44,8 @@ public class GraphXExtractionRule extends ExtractionRule {
                         codeLocation = line.split("\\) - Granular")[0].split(" \\(")[1];
                     }
 
-                    codeLocation = "";
-                    logFilePath = "YarnLog/" + file.getAbsolutePath().split("YarnLog/")[1];
+                    codeLocation = "unspecified";
+                    logFilePath = "unspecified";
 
                     trace.setLocation(logFilePath, lineCount, codeLocation);
                     record.setRecordLocation(trace);

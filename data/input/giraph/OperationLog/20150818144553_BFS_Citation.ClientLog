@@ -1,0 +1,59 @@
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/local/wlngai/yarn/share/hadoop/common/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/local/wlngai/giraph/giraph-1.1.0-for-hadoop-2.4.1-jar-with-dependencies.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+15/08/18 14:46:32 INFO utils.ConfigurationUtils: No edge input format specified. Ensure your InputFormat does not require one.
+15/08/18 14:46:32 INFO utils.ConfigurationUtils: No edge output format specified. Ensure your OutputFormat does not require one.
+15/08/18 14:46:32 INFO utils.ConfigurationUtils: Setting custom argument [sourceId] to [4949326] in GiraphConfiguration
+15/08/18 14:46:32 INFO utils.ConfigurationUtils: Setting custom argument [mainId] to [4949326] in GiraphConfiguration
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Final output path is: hdfs://10.149.3.5:8020/output/20150818144553_BFS_Citation
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Running Client
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Granular InfoName:StartTime InfoValue:1439901993179 Timestamp:1439901993179 RecordUuid:7070715342320757608 OperationUuid:8833617398416740917 ActorType:AppMaster ActorId:Id.Unique MissionType:AppStartup MissionId:Id.Unique ParentDescriptor:UniqueParent
+15/08/18 14:46:33 INFO client.RMProxy: Connecting to ResourceManager at /10.149.3.5:8032
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Got node report from ASM for, nodeId=node329.cm.cluster:53096, nodeAddress node329.cm.cluster:8042, nodeRackName /default-rack, nodeNumContainers 0
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Got node report from ASM for, nodeId=node330.cm.cluster:45433, nodeAddress node330.cm.cluster:8042, nodeRackName /default-rack, nodeNumContainers 0
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Got node report from ASM for, nodeId=node327.cm.cluster:48884, nodeAddress node327.cm.cluster:8042, nodeRackName /default-rack, nodeNumContainers 0
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Got node report from ASM for, nodeId=node307.cm.cluster:60129, nodeAddress node307.cm.cluster:8042, nodeRackName /default-rack, nodeNumContainers 0
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Got node report from ASM for, nodeId=node325.cm.cluster:45100, nodeAddress node325.cm.cluster:8042, nodeRackName /default-rack, nodeNumContainers 0
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Obtained new Application ID: application_1439901900213_0001
+15/08/18 14:46:33 INFO Configuration.deprecation: mapred.job.id is deprecated. Instead, use mapreduce.job.id
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Set the environment for the application master
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Environment for AM :{CLASSPATH=${CLASSPATH}:./*:$HADOOP_CONF_DIR:$HADOOP_COMMON_HOME/share/hadoop/common/*:$HADOOP_COMMON_HOME/share/hadoop/common/lib/*:$HADOOP_HDFS_HOME/share/hadoop/hdfs/*:$HADOOP_HDFS_HOME/share/hadoop/hdfs/lib/*:$HADOOP_YARN_HOME/share/hadoop/yarn/*:$HADOOP_YARN_HOME/share/hadoop/yarn/lib/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*}
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: buildLocalResourceMap ....
+15/08/18 14:46:33 INFO yarn.YarnUtils: Registered file in LocalResources :: hdfs://10.149.3.5:8020/user/wlngai/giraph_yarn_jar_cache/application_1439901900213_0001/giraph-conf.xml
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: LIB JARS :giraph-1.1.0-for-hadoop-2.4.1-jar-with-dependencies.jar,Giraph_Jobs-1.0.jar
+15/08/18 14:46:33 INFO yarn.YarnUtils: Class path name .
+15/08/18 14:46:33 INFO yarn.YarnUtils: base path checking .
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Made local resource for :/local/wlngai/giraph/Giraph_Jobs-1.0.jar to hdfs://10.149.3.5:8020/user/wlngai/giraph_yarn_jar_cache/application_1439901900213_0001/Giraph_Jobs-1.0.jar
+15/08/18 14:46:33 INFO yarn.YarnUtils: Registered file in LocalResources :: hdfs://10.149.3.5:8020/user/wlngai/giraph_yarn_jar_cache/application_1439901900213_0001/Giraph_Jobs-1.0.jar
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Made local resource for :/local/wlngai/giraph/giraph-1.1.0-for-hadoop-2.4.1-jar-with-dependencies.jar to hdfs://10.149.3.5:8020/user/wlngai/giraph_yarn_jar_cache/application_1439901900213_0001/giraph-1.1.0-for-hadoop-2.4.1-jar-with-dependencies.jar
+15/08/18 14:46:34 INFO yarn.YarnUtils: Registered file in LocalResources :: hdfs://10.149.3.5:8020/user/wlngai/giraph_yarn_jar_cache/application_1439901900213_0001/giraph-1.1.0-for-hadoop-2.4.1-jar-with-dependencies.jar
+15/08/18 14:46:34 INFO yarn.GiraphYarnClient: ApplicationSumbissionContext for GiraphApplicationMaster launch container is populated.
+15/08/18 14:46:34 INFO yarn.GiraphYarnClient: Submitting application to ASM
+15/08/18 14:46:34 INFO impl.YarnClientImpl: Submitted application application_1439901900213_0001
+15/08/18 14:46:34 INFO yarn.GiraphYarnClient: Got new appId after submission :application_1439901900213_0001
+15/08/18 14:46:34 INFO yarn.GiraphYarnClient: GiraphApplicationMaster container request was submitted to ResourceManager for job: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation
+15/08/18 14:46:35 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 0.87 secs
+15/08/18 14:46:35 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: ACCEPTED, Containers used: 1
+15/08/18 14:46:39 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 4.88 secs
+15/08/18 14:46:39 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 1
+15/08/18 14:46:43 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 8.89 secs
+15/08/18 14:46:43 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 6
+15/08/18 14:46:47 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 12.90 secs
+15/08/18 14:46:47 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 6
+15/08/18 14:46:51 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 16.91 secs
+15/08/18 14:46:51 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 6
+15/08/18 14:46:55 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 20.92 secs
+15/08/18 14:46:55 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 6
+15/08/18 14:46:59 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 24.93 secs
+15/08/18 14:46:59 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 6
+15/08/18 14:47:03 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 28.93 secs
+15/08/18 14:47:03 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 6
+15/08/18 14:47:07 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 32.94 secs
+15/08/18 14:47:07 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 6
+15/08/18 14:47:11 INFO yarn.GiraphYarnClient: Giraph: org.apache.giraph.algorithms.DirectedBFSComputation, Elapsed: 36.95 secs
+15/08/18 14:47:11 INFO yarn.GiraphYarnClient: appattempt_1439901900213_0001_000001, State: RUNNING, Containers used: 2
+15/08/18 14:47:13 INFO yarn.GiraphYarnClient: Cleaning up HDFS distributed cache directory for Giraph job.
+15/08/18 14:47:13 INFO yarn.GiraphYarnClient: Completed Giraph: org.apache.giraph.algorithms.DirectedBFSComputation: SUCCEEDED, total running time: 0 minutes, 39 seconds.
+15/08/18 14:47:13 INFO yarn.GiraphYarnClient: Granular InfoName:EndTime InfoValue:1439902033545 Timestamp:1439902033545 RecordUuid:8531997610709158048 OperationUuid:5454990099794522976 ActorType:AppMaster ActorId:Id.Unique MissionType:AppTermination MissionId:Id.Unique ParentDescriptor:UniqueParent

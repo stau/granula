@@ -21,12 +21,12 @@ public class GiraphExtractionRule extends ExtractionRule {
         return false;
     }
 
-    public List<Record> extractRecordFromFile(File file) {
+    public List<Record> extractRecordFromInputStream(InputStream fis) {
 
         List<Record> granulalogList = new ArrayList<>();
 
         try {
-            FileInputStream fis = new FileInputStream(file);
+
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
             String line = null;
@@ -52,7 +52,7 @@ public class GiraphExtractionRule extends ExtractionRule {
                         }
                     }
 
-                    String logFilePath = "YarnLog/" + file.getAbsolutePath().split("YarnLog/")[1];
+                    String logFilePath = "unknown";
                     trace.setLocation(logFilePath, lineCount, codeLocation);
                     record.setRecordLocation(trace);
 
