@@ -1,9 +1,20 @@
+
+
+// Worker-1 @ Task [StartTime, EndTime]
 15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Granular InfoName:StartTime InfoValue:1439901993179 Timestamp:1439901993179 RecordUuid:7070715342320757608 OperationUuid:8833617398416740917 ActorType:Worker ActorId:1 MissionType:Task MissionId:Id.Unique ParentDescriptor:UniqueParent
 15/08/18 14:47:13 INFO yarn.GiraphYarnClient: Granular InfoName:EndTime InfoValue:1439902033545 Timestamp:1439902033545 RecordUuid:8531997610709158048 OperationUuid:8833617398416740917 ActorType:Worker ActorId:1 MissionType:Task MissionId:Id.Unique ParentDescriptor:UniqueParent
+
+// Worker-2 @ Task [StartTime, EndTime]
 15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Granular InfoName:StartTime InfoValue:1439901993179 Timestamp:1439901994179 RecordUuid:7070715342320757608 OperationUuid:5454990099794522976 ActorType:Worker ActorId:2 MissionType:Task MissionId:Id.Unique ParentDescriptor:UniqueParent
 15/08/18 14:47:13 INFO yarn.GiraphYarnClient: Granular InfoName:EndTime InfoValue:1439902034545 Timestamp:1439902034545 RecordUuid:8531997610709158048 OperationUuid:5454990099794522976 ActorType:Worker ActorId:2 MissionType:Task MissionId:Id.Unique ParentDescriptor:UniqueParent
 
 
+// Worker-1 @ Task [MemoryUsage]
 15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Granular InfoName:MemoryUsage InfoValue:1439901993179-100#1439901995179-200#1439901997179-100 Timestamp:1439901993179 RecordUuid:7070715342320757608 OperationUuid:8833617398416740917 ActorType:Worker ActorId:1 MissionType:Task MissionId:Id.Unique ParentDescriptor:UniqueParent
 
+// Worker-2 @ Task [MemoryUsage]
 15/08/18 14:47:13 INFO yarn.GiraphYarnClient: Granular InfoName:MemoryUsage InfoValue:1439901993179-200#1439901995179-400#1439901997179-100 Timestamp:1439902034545 RecordUuid:8531997610709158048 OperationUuid:5454990099794522976 ActorType:Worker ActorId:2 MissionType:Task MissionId:Id.Unique ParentDescriptor:UniqueParent
+
+// Executor-1 @ Superstep-1 [StartTime, EndTime]
+15/08/18 14:46:33 INFO yarn.GiraphYarnClient: Granular InfoName:StartTime InfoValue:1439901993179 Timestamp:1439901993379 RecordUuid:7070715342320757608 OperationUuid:8833617398416740917 ActorType:Executor ActorId:1 MissionType:Superstep MissionId:1 ParentDescriptor:UniqueParent
+15/08/18 14:47:13 INFO yarn.GiraphYarnClient: Granular InfoName:EndTime InfoValue:1439902033545 Timestamp:1439902033445 RecordUuid:8531997610709158048 OperationUuid:8833617398416740917 ActorType:Executor ActorId:1 MissionType:Superstep MissionId:1 ParentDescriptor:UniqueParent

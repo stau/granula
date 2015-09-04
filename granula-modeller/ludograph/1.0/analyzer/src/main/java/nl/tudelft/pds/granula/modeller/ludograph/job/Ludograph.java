@@ -23,7 +23,6 @@ import nl.tudelft.pds.granula.modeller.rule.derivation.DerivationRule;
 import nl.tudelft.pds.granula.modeller.ludograph.operation.*;
 import nl.tudelft.pds.granula.modeller.rule.extraction.LudographExtractionRule;
 import nl.tudelft.pds.granula.modeller.rule.filling.UniqueOperationFilling;
-import nl.tudelft.pds.granula.modeller.rule.linking.UniqueParentLinking;
 
 /**
  * Created by wing on 12-3-15.
@@ -33,13 +32,14 @@ public class Ludograph extends JobModel {
     public Ludograph() {
         super();
         addOperationModel(new TopActorTopMission());
-        addOperationModel(new BspExecutorBsp());
-            addOperationModel(new WorkerTask());
+        addOperationModel(new BspEngineBspIteration());
+        addOperationModel(new WorkerTask());
+        addOperationModel(new ExecutorSuperstep());
     }
 
     public void loadRules() {
         addFillingRule(new UniqueOperationFilling(1, LudographType.TopActor, LudographType.TopMission));
-        addFillingRule(new UniqueOperationFilling(1, LudographType.BspExecutor, LudographType.Bsp));
+        addFillingRule(new UniqueOperationFilling(1, LudographType.BspEngine, LudographType.BspIteration));
         addInfoDerivation(new JobNameDerivationRule(2));
         addExtraction(new LudographExtractionRule(1));
     }
@@ -60,7 +60,7 @@ public class Ludograph extends JobModel {
 //            Operation bspIteration = null;
 //            Operation containerAssignment = null;
 //            for (Operation operation : job.getTopOperation().getChildren()) {
-//                if (operation.hasType(LudographType.AppMaster, LudographType.BspExecutor)) {
+//                if (operation.hasType(LudographType.AppMaster, LudographType.BspEngine)) {
 //                    for (Operation suboperation : operation.getChildren()) {
 //                        if (suboperation.hasType(LudographType.BspMaster, LudographType.BspIteration)) {
 //                            bspIteration = suboperation;

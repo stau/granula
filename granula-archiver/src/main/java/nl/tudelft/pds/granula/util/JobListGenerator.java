@@ -17,13 +17,8 @@ import java.util.Comparator;
  */
 public class JobListGenerator {
 
-    public static void main(String[] args) {
-        JobListGenerator jobListGenerator  = new JobListGenerator();
-        jobListGenerator.generateRecentJobsList();
-    }
-
-    public void generateRecentJobsList() {
-        String vizRepoPath = Configuration.repoPath + "/granula-visualizer";
+    public void generateRecentJobsList(String repoPath) {
+        String vizRepoPath = repoPath + "/granula-visualizer";
         generateForEntireDirectory(
                 vizRepoPath + "/data/archive/",
                 vizRepoPath + "/data/list" + "/recent-jobs.xml");

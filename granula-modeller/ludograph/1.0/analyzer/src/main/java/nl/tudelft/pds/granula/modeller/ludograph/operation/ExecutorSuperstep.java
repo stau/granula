@@ -20,38 +20,38 @@ import nl.tudelft.pds.granula.archiver.entity.info.Source;
 import nl.tudelft.pds.granula.archiver.entity.info.SummaryInfo;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
 import nl.tudelft.pds.granula.modeller.ludograph.LudographType;
-import nl.tudelft.pds.granula.modeller.model.operation.AbstractOperationModel;
+import nl.tudelft.pds.granula.modeller.ludograph.job.Ludograph;
 import nl.tudelft.pds.granula.modeller.model.operation.ConcreteOperationModel;
 import nl.tudelft.pds.granula.modeller.rule.derivation.BasicSummaryDerivation;
-import nl.tudelft.pds.granula.modeller.rule.derivation.time.DurationDerivation;
-import nl.tudelft.pds.granula.modeller.rule.derivation.time.FilialEndTimeDerivation;
-import nl.tudelft.pds.granula.modeller.rule.derivation.time.FilialStartTimeDerivation;
+import nl.tudelft.pds.granula.modeller.rule.derivation.RecordTimeSeriesDerivation;
+import nl.tudelft.pds.granula.modeller.rule.linking.IdentifierParentLinking;
 import nl.tudelft.pds.granula.modeller.rule.linking.UniqueParentLinking;
 import nl.tudelft.pds.granula.modeller.rule.visual.MainInfoTableVisualization;
+import nl.tudelft.pds.granula.modeller.rule.visual.TimeSeriesVisualization;
 
 import java.util.ArrayList;
 
-public class BspExecutorBsp extends AbstractOperationModel {
+public class ExecutorSuperstep extends ConcreteOperationModel {
 
-    public BspExecutorBsp() {
-        super(LudographType.BspExecutor, LudographType.Bsp);
+    public ExecutorSuperstep() {
+        super(LudographType.Executor, LudographType.Superstep);
     }
 
     public void loadRules() {
         super.loadRules();
 
-        addLinkingRule(new UniqueParentLinking(LudographType.TopActor, LudographType.TopMission));
+        addLinkingRule(new IdentifierParentLinking(LudographType.Worker, LudographType.Equal, LudographType.Task, LudographType.Unique));
 
+//        addInfoDerivation(new RecordTimeSeriesDerivation(1, "MemoryUsage"));
 //        addInfoDerivation(new RecordInfoDerivation(1, "ResponseTime"));
 //        addInfoDerivation(new ColorDerivation(1, LudographType.ColorGrey));
-        addInfoDerivation(new FilialStartTimeDerivation(2));
-        addInfoDerivation(new FilialEndTimeDerivation(2));
-        addInfoDerivation(new DurationDerivation(3));
         addInfoDerivation(new SummaryDerivation(10));
         addVisualDerivation(new MainInfoTableVisualization(1,
                 new ArrayList<String>() {{
 //                    add("ResponseTime");
                 }}));
+
+
     }
 
     protected class SummaryDerivation extends BasicSummaryDerivation {
@@ -61,7 +61,7 @@ public class BspExecutorBsp extends AbstractOperationModel {
         @Override
         public boolean execute() {
             Operation operation = (Operation) entity;
-            String summary = String.format("The [%s] operation set up the AppMaster and starts to request Yarn Containers required for the Bsp Execution. " +
+            String summary = String.format("The [%s] operation set up the AppMaster and starts to request Yarn Containers required for the BspIteration Execution. " +
                     "This operation starts after AppMaster starts operating, " +
                     "and ends when AppMaster being notified that all containers requests are granted. ",
                     operation.getName());

@@ -73,7 +73,7 @@ public class TopActorTopMission extends AbstractOperationModel {
                 String summary = String.format("The [%s] operation is the top-level operation of each Giraph job. " +
                         "In Giraph, this operation starts when the AppMaster is initialized, " +
                         "and ends when the AppMaster is terminated. " +
-                        "It contains 3 child operations: Deployment, BspExecutor and Undeployment. ", operation.getName());
+                        "It contains 3 child operations: Deployment, BspEngine and Undeployment. ", operation.getName());
                 summary += getBasicSummary(operation);
 
                 SummaryInfo summaryInfo = new SummaryInfo("Summary");

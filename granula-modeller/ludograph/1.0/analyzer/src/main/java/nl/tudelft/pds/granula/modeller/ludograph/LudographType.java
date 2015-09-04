@@ -23,12 +23,13 @@ public class LudographType extends Identifier {
     public static String TopActor = "TopActor";
     public static String TopMission = "TopMission";
 
-    public static String BspExecutor = "BspExecutor";
-    public static String Bsp = "Bsp";
+    public static String BspEngine = "BspEngine";
+    public static String BspIteration = "BspIteration";
 
     public static String Worker = "Worker";
     public static String Task = "Task";
 
-
+    public static String Executor = "Executor";
+    public static String Superstep = "Superstep";
 
 }

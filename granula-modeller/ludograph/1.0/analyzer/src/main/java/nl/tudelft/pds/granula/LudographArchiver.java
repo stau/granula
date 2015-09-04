@@ -24,7 +24,7 @@ public class LudographArchiver {
         granulaArchiver.archive();
 
         // generate list
-        (new JobListGenerator()).generateRecentJobsList();
+        (new JobListGenerator()).generateRecentJobsList(repoPath);
 
     }
 }
