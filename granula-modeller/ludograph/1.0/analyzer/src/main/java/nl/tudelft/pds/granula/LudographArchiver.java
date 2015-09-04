@@ -14,7 +14,7 @@ public class LudographArchiver {
     public static void main(String[] args) {
 
         String repoPath = "/home/wlngai/Downloads/granula";
-        String inputPath = repoPath + "/data/input/ludograph";
+        String inputPath = repoPath + "/data/input/ludograph-stau";
         String outputPath = repoPath + "/granula-visualizer/data/archive/";
 
         JobDirectorySource jobDirSource = new JobDirectorySource(inputPath);

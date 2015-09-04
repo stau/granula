@@ -40,7 +40,15 @@ public class WorkerTask extends ConcreteOperationModel {
 
         addLinkingRule(new UniqueParentLinking(LudographType.BspEngine, LudographType.BspIteration));
 
-        addInfoDerivation(new RecordTimeSeriesDerivation(1, "MemoryUsage"));
+        addInfoDerivation(new RecordTimeSeriesDerivation(1, "cpu.user.utilization"));
+        addInfoDerivation(new RecordTimeSeriesDerivation(1, "cpu.total.utilization"));
+
+        addInfoDerivation(new RecordTimeSeriesDerivation(1, "memory.heap.used"));
+        addInfoDerivation(new RecordTimeSeriesDerivation(1, "memory.nonheap.max"));
+        addInfoDerivation(new RecordTimeSeriesDerivation(1, "memory.heap.max"));
+
+        addInfoDerivation(new RecordTimeSeriesDerivation(1, "network.sent.bytes"));
+        addInfoDerivation(new RecordTimeSeriesDerivation(1, "network.received.bytes"));
 //        addInfoDerivation(new RecordInfoDerivation(1, "ResponseTime"));
 //        addInfoDerivation(new ColorDerivation(1, LudographType.ColorGrey));
         addInfoDerivation(new SummaryDerivation(10));
@@ -50,9 +58,21 @@ public class WorkerTask extends ConcreteOperationModel {
                 }}));
 
 
-        TimeSeriesVisualization trafficTSVisualization = new TimeSeriesVisualization(1, "NetworkTrafficVisual", "Utilization", "Volume", "b");
-        trafficTSVisualization.addY1Info("MemoryUsage");
-        addVisualDerivation(trafficTSVisualization);
+        TimeSeriesVisualization cpuTSVisualization = new TimeSeriesVisualization(1, "CPUVisual", "CPU", "unknown", "");
+        cpuTSVisualization.addY1Info("cpu.user.utilization");
+        cpuTSVisualization.addY1Info("cpu.total.utilization");
+        addVisualDerivation(cpuTSVisualization);
+
+        TimeSeriesVisualization memoryTSVisualization = new TimeSeriesVisualization(1, "MemoryVisual", "Memory", "unknown", "");
+        memoryTSVisualization.addY1Info("memory.heap.used");
+        memoryTSVisualization.addY1Info("memory.nonheap.max");
+        memoryTSVisualization.addY1Info("memory.heap.max");
+        addVisualDerivation(memoryTSVisualization);
+
+        TimeSeriesVisualization networkTSVisualization = new TimeSeriesVisualization(1, "NetworkVisual", "Network", "unknown", "");
+        networkTSVisualization.addY1Info("network.sent.bytes");
+        networkTSVisualization.addY1Info("network.received.bytes");
+        addVisualDerivation(networkTSVisualization);
     }
 
     protected class SummaryDerivation extends BasicSummaryDerivation {

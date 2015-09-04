@@ -30,6 +30,6 @@ public class LudographType extends Identifier {
     public static String Task = "Task";
 
     public static String Executor = "Executor";
-    public static String Superstep = "Superstep";
+    public static String Step = "Step";
 
 }

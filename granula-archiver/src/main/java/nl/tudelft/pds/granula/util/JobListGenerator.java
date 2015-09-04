@@ -40,9 +40,11 @@ public class JobListGenerator {
 
         for (File arcFile : jobArcFiles) {
             if(arcFile.isFile()) {
-                System.out.println(arcFile.getAbsolutePath());
-                String arcFileUrl = "data/archive/" + new File(arcFile.getAbsolutePath()).getName();
-                xmlNodeBuilder.append(generateJobXmlNode(arcFile.getAbsolutePath(), arcFileUrl));
+                if(arcFile.getName().endsWith(".xml")) {
+                    System.out.println(arcFile.getAbsolutePath());
+                    String arcFileUrl = "data/archive/" + new File(arcFile.getAbsolutePath()).getName();
+                    xmlNodeBuilder.append(generateJobXmlNode(arcFile.getAbsolutePath(), arcFileUrl));
+                }
             }
         }
 

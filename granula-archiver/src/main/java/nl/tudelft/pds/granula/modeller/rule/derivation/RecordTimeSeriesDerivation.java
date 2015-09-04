@@ -45,8 +45,8 @@ public class RecordTimeSeriesDerivation extends DerivationRule {
 
         TimeSeries timeSeries = new TimeSeries();
         for (String timeValueStr : x.split("#")) {
-                long time = Long.parseLong(timeValueStr.split("-")[0]);
-                long value = Long.parseLong(timeValueStr.split("-")[1]);
+                long time = Long.parseLong(timeValueStr.split("-", 2)[0]);
+                double value = Double.parseDouble(timeValueStr.split("-", 2)[1]);
                 timeSeries.addDatapoint(time, value);
         };
 

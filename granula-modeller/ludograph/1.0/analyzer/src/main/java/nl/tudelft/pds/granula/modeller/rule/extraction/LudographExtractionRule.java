@@ -38,7 +38,7 @@ public class LudographExtractionRule extends ExtractionRule {
                     RecordLocation trace = new RecordLocation();
                     String codeLocation = "";
 
-                    String[] lineParts = line.split("\\) - Granular");
+                    String[] lineParts = line.split("Granular");
                     if(lineParts.length > 1) {
                         String[] prefixParts = lineParts[0].split(" \\(");
                         if(prefixParts.length > 1) {

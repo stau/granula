@@ -34,7 +34,7 @@ public class Ludograph extends JobModel {
         addOperationModel(new TopActorTopMission());
         addOperationModel(new BspEngineBspIteration());
         addOperationModel(new WorkerTask());
-        addOperationModel(new ExecutorSuperstep());
+        addOperationModel(new ExecutorStep());
     }
 
     public void loadRules() {

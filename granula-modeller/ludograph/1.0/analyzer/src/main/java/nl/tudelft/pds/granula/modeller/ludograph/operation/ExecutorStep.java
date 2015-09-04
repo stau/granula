@@ -20,21 +20,17 @@ import nl.tudelft.pds.granula.archiver.entity.info.Source;
 import nl.tudelft.pds.granula.archiver.entity.info.SummaryInfo;
 import nl.tudelft.pds.granula.archiver.entity.operation.Operation;
 import nl.tudelft.pds.granula.modeller.ludograph.LudographType;
-import nl.tudelft.pds.granula.modeller.ludograph.job.Ludograph;
 import nl.tudelft.pds.granula.modeller.model.operation.ConcreteOperationModel;
 import nl.tudelft.pds.granula.modeller.rule.derivation.BasicSummaryDerivation;
-import nl.tudelft.pds.granula.modeller.rule.derivation.RecordTimeSeriesDerivation;
 import nl.tudelft.pds.granula.modeller.rule.linking.IdentifierParentLinking;
-import nl.tudelft.pds.granula.modeller.rule.linking.UniqueParentLinking;
 import nl.tudelft.pds.granula.modeller.rule.visual.MainInfoTableVisualization;
-import nl.tudelft.pds.granula.modeller.rule.visual.TimeSeriesVisualization;
 
 import java.util.ArrayList;
 
-public class ExecutorSuperstep extends ConcreteOperationModel {
+public class ExecutorStep extends ConcreteOperationModel {
 
-    public ExecutorSuperstep() {
-        super(LudographType.Executor, LudographType.Superstep);
+    public ExecutorStep() {
+        super(LudographType.Executor, LudographType.Step);
     }
 
     public void loadRules() {
