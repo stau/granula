@@ -39,7 +39,7 @@ public class JobListGenerator {
         Arrays.sort(jobArcFiles, new Comparator<File>() {
             @Override
             public int compare(File f1, File f2) {
-                return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+                return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
             }
         });
 

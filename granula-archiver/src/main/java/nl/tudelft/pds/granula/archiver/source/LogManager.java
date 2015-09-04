@@ -16,43 +16,19 @@
 
 package nl.tudelft.pds.granula.archiver.source;
 
-import nl.tudelft.pds.granula.util.TarExtractor;
-import org.apache.commons.io.FileUtils;
-
-import java.io.*;
-
 /**
  * Created by wing on 30-1-15.
  */
 public class LogManager {
 
     final String logTempDir = "/tmp/Granula/Log";
-    WorkloadLog workloadLog;
+    WorkloadFileSource workloadSource;
 
-    public LogManager(WorkloadLog workloadLog) {
-        this.workloadLog = workloadLog;
+    public LogManager(WorkloadFileSource workloadSource) {
+        this.workloadSource = workloadSource;
     }
 
-    public void decompressLog() {
-
-        try {
-            String tarFilePath = workloadLog.getTarFilePath();
-            String workloadName = workloadLog.getName();
-            String outputDir = workloadLog.getTmpDirPath();
-            File outputDirFile = new File(outputDir);
-            FileUtils.deleteDirectory(outputDirFile);
-            outputDirFile.mkdirs();
-            TarExtractor tarExtractor = new TarExtractor();
-            tarExtractor.extract(tarFilePath, outputDir);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public WorkloadLog getWorkloadLog() {
-        return workloadLog;
+    public WorkloadFileSource getWorkloadSource() {
+        return workloadSource;
     }
 }

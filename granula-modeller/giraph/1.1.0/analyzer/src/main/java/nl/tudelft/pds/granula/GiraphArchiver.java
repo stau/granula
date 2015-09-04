@@ -1,7 +1,10 @@
 package nl.tudelft.pds.granula;
 
-import nl.tudelft.pds.granula.archiver.source.WorkloadLog;
+import nl.tudelft.pds.granula.archiver.source.JobDirectorySource;
+import nl.tudelft.pds.granula.archiver.source.JobSource;
+import nl.tudelft.pds.granula.archiver.source.WorkloadFileSource;
 import nl.tudelft.pds.granula.modeller.giraph.job.Giraph;
+import nl.tudelft.pds.granula.util.JobListGenerator;
 
 import java.io.File;
 import java.util.Arrays;
@@ -12,28 +15,33 @@ import java.util.Arrays;
 public class GiraphArchiver {
     public static void main(String[] args) {
 
-
-        String repoPath = Configuration.repoPath;
-
-        String workloadDirPath = repoPath + "/data/input/";
-        File workloadDir = new File(workloadDirPath);
-        File[] workloadFiles = workloadDir.listFiles();
-
-        if(workloadFiles == null || workloadFiles.length < 1) {
-            throw new IllegalStateException("No data source found.");
-        }
-
-        Arrays.sort(workloadFiles);
-        File workloadFile =workloadFiles[workloadFiles.length - 1];
-        workloadFile = new File(repoPath + "/data/input/giraph.tar.gz");
-        WorkloadLog workloadLog = new WorkloadLog(workloadFile.getName().replace(".tar.gz", ""), workloadDirPath + workloadFile.getName());
-
-        String outputPath = repoPath + "/granula-visualizer/data/archive/";
+        // output
+        String outputPath = Configuration.repoPath + "/granula-visualizer/data/archive/";
 //        String outputPath = String.format(\"/home/wing/Workstation/Dropbox/Repo/granula/data/output/giraph.xml\", workloadLog.getName());
 
 
-        GranulaArchiver granulaArchiver = new GranulaArchiver(workloadLog, new Giraph(), outputPath);
+
+        // workload
+//        String workloadDirPath = Configuration.repoPath + "/data/input/";
+//        File workloadFile = new File(workloadDirPath + "/giraph.tar.gz");
+//        WorkloadFileSource workloadSource = new WorkloadFileSource(workloadFile.getAbsolutePath());
+//        workloadSource.load();
+//
+//        for (JobSource jobSource : workloadSource.getEmbeddedJobSources()) {
+//            GranulaArchiver granulaArchiver = new GranulaArchiver(jobSource, new Giraph(), outputPath);
+//            granulaArchiver.archive();
+//        }
+
+        // job
+        JobDirectorySource jobDirSource = new JobDirectorySource(Configuration.repoPath + "/data/input/giraph");
+        jobDirSource.load();
+
+        GranulaArchiver granulaArchiver = new GranulaArchiver(jobDirSource, new Giraph(), outputPath);
         granulaArchiver.archive();
 
+
+
+        // generate list
+        (new JobListGenerator()).generateRecentJobsList();
     }
 }

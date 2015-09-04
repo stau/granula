@@ -4,6 +4,7 @@ import nl.tudelft.pds.granula.archiver.source.record.Record;
 import nl.tudelft.pds.granula.modeller.rule.Rule;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -15,6 +16,6 @@ public abstract class ExtractionRule extends Rule {
         super(level);
     }
 
-    public abstract List<Record> extractRecordFromFile(File file);
+    public abstract List<Record> extractRecordFromInputStream(InputStream fis);
 
 }
